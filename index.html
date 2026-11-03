@@ -13,6 +13,8 @@
   const HOUSEHOLD     = "vincent-xenia";               // gemeinsamer Haushalt — bei dir & Xenia gleich lassen
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<!-- Barcode-Scanner, der auch auf iPhone/Safari funktioniert -->
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
 <script>
   // Supabase-Client aufbauen, sobald die Schlüssel echt sind
   let sb=null;
@@ -1247,33 +1249,56 @@ function openScanner(onFound, onBack){
   let found=null;         // Barcode-Treffer
   let view='menu';        // 'menu' | 'cam' | 'label' | 'ocr'
   let ocr=null;           // erkannte Nährwerte
-  let stream=null, scanStop=false;
-  function stopCam(){ scanStop=true; if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; } }
-  const hasCamBarcode = ('BarcodeDetector' in window) && navigator.mediaDevices;
+  let stream=null, scanStop=false, zxReader=null;
+  function stopCam(){ scanStop=true;
+    try{ if(zxReader){ zxReader.reset(); zxReader=null; } }catch(_){}
+    if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; } }
+  // Kamera-Scan möglich, wenn eine der beiden Methoden da ist
+  const hasBarcodeAPI = ('BarcodeDetector' in window);
+  const hasZX = !!(window.ZXing || window.ZXingBrowser);
+  const hasCamBarcode = (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) && (hasBarcodeAPI || hasZX);
+
+  async function onCode(bc, status){
+    stopCam(); if(status) status.textContent='Barcode '+bc+' — suche…';
+    const prod=await lookupBarcode(bc);
+    if(prod){ found=prod; view='menu'; draw(); }
+    else if(status){ status.textContent='Nicht gefunden. Etikett fotografieren.'; }
+  }
 
   // Live-Kamera: Barcode erkennen → Open Food Facts
   async function startCam(){
     view='cam'; draw();
     const video=mod.querySelector('#camVid'); const status=mod.querySelector('#camStatus');
-    try{
-      stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
-      video.srcObject=stream; await video.play(); scanStop=false;
-      const det=new window.BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128']});
-      const tick=async()=>{
-        if(scanStop) return;
-        try{ const codes=await det.detect(video);
-          if(codes&&codes.length){ const bc=codes[0].rawValue;
-            status.textContent='Barcode '+bc+' — suche…'; stopCam();
-            const prod=await lookupBarcode(bc);
-            if(prod){ found=prod; view='menu'; draw(); }
-            else { status.textContent='Nicht gefunden. Etikett fotografieren.'; }
-            return;
-          }
-        }catch(e){}
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }catch(e){ if(status) status.textContent='Kamera nicht verfügbar — Barcode unten eingeben oder Etikett fotografieren.'; }
+    scanStop=false;
+    // Weg 1: schnelle native API (Android/Chrome)
+    if(hasBarcodeAPI){
+      try{
+        stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+        video.srcObject=stream; await video.play();
+        if(status) status.textContent='Kamera aktiv — Barcode in den Rahmen halten';
+        const det=new window.BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128']});
+        const tick=async()=>{ if(scanStop) return;
+          try{ const codes=await det.detect(video);
+            if(codes&&codes.length){ return onCode(codes[0].rawValue, status); }
+          }catch(e){}
+          requestAnimationFrame(tick); };
+        requestAnimationFrame(tick); return;
+      }catch(e){ /* weiter zu ZXing */ }
+    }
+    // Weg 2: ZXing (funktioniert auch auf iPhone/Safari)
+    const ZX = window.ZXing || window.ZXingBrowser;
+    if(ZX){
+      try{
+        if(status) status.textContent='Kamera aktiv — Barcode in den Rahmen halten';
+        zxReader = new ZX.BrowserMultiFormatReader();
+        await zxReader.decodeFromVideoDevice(null, video, (result,err)=>{
+          if(scanStop) return;
+          if(result){ onCode(result.getText ? result.getText() : result.text, status); }
+        });
+        return;
+      }catch(e){}
+    }
+    if(status) status.textContent='Kamera nicht verfügbar — Barcode unten eingeben oder Etikett fotografieren.';
   }
   function draw(){
     // --- Live-Kamera (echter Barcode-Scan) ---
@@ -1350,7 +1375,7 @@ function openScanner(onFound, onBack){
       <div class="mh-sub">Barcode scannen oder die Nährwerttabelle abfotografieren.</div>
       <div class="scan-view">
         <div class="scan-frame"><div class="scan-line"></div></div>
-        <div class="scan-hint">Kamera im Prototyp simuliert · unten Beispiel wählen</div>
+        <div class="scan-hint">Kamera starten und Barcode in den Rahmen halten</div>
       </div>
       ${found?`<div class="prod-card">
         <div class="prod-emoji">${found.emoji}</div>
@@ -1363,7 +1388,7 @@ function openScanner(onFound, onBack){
       </div>
       <button class="btn lime" id="addFound">Zur Mahlzeit hinzufügen</button>
       <button class="scan-back" id="again">Anderes Produkt scannen</button>`
-      :`${hasCamBarcode?`<button class="btn lime" id="startCam" style="margin-bottom:10px">📷 Kamera starten &amp; Barcode scannen</button>`:`<div class="scan-hint" style="position:static;color:var(--amber);margin-bottom:10px">Kamera-Scan braucht ein Handy mit HTTPS-Adresse. Solange: Barcode unten eingeben.</div>`}
+      :`${hasCamBarcode?`<button class="btn lime" id="startCam" style="margin-bottom:10px">📷 Kamera starten &amp; Barcode scannen</button>`:`<div class="scan-hint" style="position:static;color:var(--amber);margin-bottom:10px">Kamera-Scan hier nicht möglich (öffne die App über die https-Adresse auf dem Handy). Solange: Barcode unten eingeben.</div>`}
       <div class="bc-row"><input id="bcInput" inputmode="numeric" placeholder="Barcode eingeben, z.B. 4008400402222"><button id="bcGo">Suchen</button></div>
       <div id="bcErr" style="font-size:12px;color:var(--coral);min-height:16px;margin-bottom:4px"></div>
       <div class="scan-or">oder</div>
