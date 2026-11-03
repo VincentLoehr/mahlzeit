@@ -8,8 +8,8 @@
      HIER DEINE SUPABASE-DATEN EINTRAGEN (2 Zeilen, aus Supabase → Project Settings → API)
      ════════════════════════════════════════════════════════════════ -->
 <script>
-  const SUPABASE_URL  = "https://fqtoaugxtjrneidnyoom.supabase.co/rest/v1/";      // z.B. https://abcd1234.supabase.co
-  const SUPABASE_ANON = "sb_publishable_8rAJCbFuw8jGlPUlkXF7ig_7ijDm3KA";          // der "anon public"- ODER "publishable"-Key (NICHT der secret-Key)
+  const SUPABASE_URL  = "https://fqtoaugxtjrneidnyoom.supabase.co";   // ohne /rest/v1/ — die Bibliothek hängt das selbst an
+  const SUPABASE_ANON = "sb_publishable_8rAJCbFuw8jGlPUlkXF7ig_7ijDm3KA";
   const HOUSEHOLD     = "vincent-xenia";               // gemeinsamer Haushalt — bei dir & Xenia gleich lassen
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -40,8 +40,8 @@
     --card-2:#1e2825;       /* zweite Ebene / Chips */
     --spruce:#101817;       /* Hero-Panels */
     --spruce-2:#182220;
-    --ink:#eef3f0;
-    --ink-soft:#8b968f;
+    --ink:#ffffff;
+    --ink-soft:#c2ccc7;
     --line:#28322f;
     --lime:#c8f24e;
     --lime-deep:#a8d43a;
@@ -475,6 +475,78 @@
   .btn:active{opacity:.9;}
   .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--card-2);color:var(--ink);padding:12px 20px;border-radius:30px;font-size:13px;font-weight:600;z-index:80;opacity:0;transition:.3s;pointer-events:none;box-shadow:var(--shadow),var(--glow);border:1px solid var(--line);}
   .toast.show{opacity:1;}
+  /* Library-Filter */
+  .lib-search{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;font-size:14px;font-family:inherit;background:var(--card);color:var(--ink);margin-bottom:10px;}
+  .lib-search:focus{outline:none;border-color:var(--lime-deep);}
+  .lib-search::placeholder{color:var(--ink-soft);}
+  .lib-filters{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+  .lf-row{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+  .lf-row::-webkit-scrollbar{display:none;}
+  .lf-chip{flex:0 0 auto;border:1.5px solid var(--line);background:var(--card);border-radius:20px;padding:7px 13px;font-size:12.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:inherit;white-space:nowrap;}
+  .lf-chip.on{background:var(--lime);border-color:var(--lime);color:#0c1210;}
+  .lf-chip.sort.on{background:var(--card-2);border-color:var(--lime-deep);color:var(--lime);}
+  .badge.cat{background:rgba(102,192,230,.16);color:var(--sky);}
+  .track-add{width:100%;border:1.5px dashed var(--line);background:none;border-radius:12px;padding:13px;color:var(--ink-soft);font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;margin-top:4px;}
+  .track-add:active{background:var(--card-2);}
+  .tm-del{width:26px;height:26px;border:none;background:none;color:var(--ink-soft);font-size:18px;cursor:pointer;flex-shrink:0;opacity:.4;}
+  .tm-del:active{opacity:1;color:var(--coral);}
+  .pick-search-row{display:flex;gap:8px;margin-bottom:12px;}
+  .pick-search-row input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;font-size:14px;font-family:inherit;background:var(--card);color:var(--ink);}
+  .pick-search-row input:focus{outline:none;border-color:var(--lime-deep);}
+  .pick-search-row input::placeholder{color:var(--ink-soft);}
+  /* Slot-Typ / Rezept */
+  .tm-type,.slot-type{cursor:pointer;color:var(--ink-soft);}
+  .tm-type:active,.slot-type:active{color:var(--lime);}
+  .slot-recipe{cursor:pointer;}
+  .cooked-dot{font-size:11px;}
+  .type-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .type-opt{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:12px 14px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;flex:1 0 42%;}
+  .type-opt.on{background:var(--lime);border-color:var(--lime);color:#0c1210;}
+  .cooked-note{background:rgba(245,178,71,.14);border:1px solid rgba(245,178,71,.3);color:var(--amber);border-radius:12px;padding:10px 13px;font-size:12.5px;font-weight:600;margin-bottom:12px;}
+  .cooked-pill{display:inline-block;margin-left:7px;font-size:10px;font-weight:700;background:rgba(245,178,71,.16);color:var(--amber);padding:2px 7px;border-radius:8px;}
+  /* Rezept-Fenster */
+  .recipe-ings{margin:4px 0 16px;}
+  .ri-line{display:flex;justify-content:space-between;padding:8px 2px;border-bottom:1px solid var(--line);font-size:14px;}
+  .ri-line span:last-child{font-family:'Space Grotesk';color:var(--ink-soft);font-weight:600;}
+  /* Koch-Session Wägung */
+  .cook-weigh{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin:14px 0;}
+  .cw-title{font-size:13px;font-weight:700;margin-bottom:10px;}
+  .pot-sel{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:10px;font-size:14px;background:var(--card-2);color:var(--ink);font-family:inherit;}
+  .weigh-calc{margin-top:10px;font-size:13px;color:var(--ink);}
+  .weigh-calc .per100{margin-top:6px;font-family:'Space Grotesk';font-weight:700;font-size:16px;color:var(--lime);}
+  .weigh-calc .per100 span{font-size:11px;color:var(--ink-soft);font-weight:500;}
+  /* Topf-Speicher */
+  .pot-grid{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+  .pot-grid::-webkit-scrollbar{display:none;}
+  .pot-card{flex:0 0 128px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;padding:0;color:var(--ink);}
+  .pot-card .pot-img{height:74px;display:grid;place-items:center;font-size:30px;color:var(--ink-soft);}
+  .pot-card .pot-img img{width:100%;height:100%;object-fit:cover;}
+  .pot-card .pot-info{padding:8px 10px;}
+  .pot-card .pot-name{font-size:12px;font-weight:600;}
+  .pot-card .pot-tare{font-family:'Space Grotesk';font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  /* Portionen-Vorrat */
+  .portion-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 14px;}
+  .pb-label{font-size:12px;color:var(--ink-soft);font-weight:600;margin-bottom:8px;}
+  .pb-ctrl{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .pb-btn{width:48px;height:44px;border:1.5px solid var(--line);background:var(--card-2);border-radius:12px;color:var(--lime);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .pb-btn:active{background:var(--lime);color:#0c1210;}
+  .pb-val{text-align:center;}
+  .pb-val span{font-family:'Space Grotesk';font-size:30px;font-weight:700;line-height:1;}
+  .pb-val small{display:block;font-size:11px;color:var(--ink-soft);margin-top:3px;}
+  /* Zubereitung */
+  .recipe-steps-label{font-size:13px;font-weight:700;margin:4px 0 8px;}
+  .recipe-steps{font-size:14px;line-height:1.55;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:14px;white-space:pre-wrap;}
+  .steps-field{margin:14px 0;}
+  .steps-field label{display:block;font-size:12px;color:var(--ink-soft);font-weight:600;margin-bottom:6px;}
+  .steps-field textarea{width:100%;min-height:96px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;font-family:inherit;line-height:1.5;background:var(--card);color:var(--ink);resize:vertical;}
+  .steps-field textarea:focus{outline:none;border-color:var(--lime-deep);}
+  .steps-field textarea::placeholder{color:var(--ink-soft);}
+  /* Akzent-Auswahl */
+  .accent-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
+  .accent-opt{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px;cursor:pointer;font-family:inherit;color:var(--ink);}
+  .accent-opt.on{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime);}
+  .accent-opt .ac-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;}
+  .accent-opt .ac-name{font-size:14px;font-weight:600;}
 </style>
 </head>
 <body>
@@ -516,6 +588,8 @@
 
     <div class="sec-label" style="margin-top:20px">Immer schnell machbar <span class="c">bei Hunger · &lt; 10 Min</span></div>
     <div class="quick-row" id="quick-row"></div>
+    <div class="sec-label" style="margin-top:20px">Meine Töpfe <span class="c">Leergewicht fürs Wiegen</span></div>
+    <div class="pot-grid" id="pot-list"></div>
     <div style="height:8px"></div>
   </section>
 
@@ -523,6 +597,21 @@
   <section class="screen" id="scr-lib">
     <div class="head">
       <div><h1>Mahlzeiten</h1><div class="sub" id="lib-count"></div></div>
+    </div>
+    <input id="lib-search" class="lib-search" placeholder="🔍 In Mahlzeiten suchen">
+    <div class="lib-filters">
+      <div class="lf-row" id="lf-cat">
+        <button class="lf-chip on" data-cat="all">Alle</button>
+        <button class="lf-chip" data-cat="Frühstück">Frühstück</button>
+        <button class="lf-chip" data-cat="Mittagessen">Mittag</button>
+        <button class="lf-chip" data-cat="Abendessen">Abend</button>
+      </div>
+      <div class="lf-row" id="lf-sort">
+        <button class="lf-chip sort on" data-sort="recent">Zuletzt</button>
+        <button class="lf-chip sort" data-sort="often">Häufigst</button>
+        <button class="lf-chip sort" data-sort="protein">Protein</button>
+        <button class="lf-chip sort" data-sort="alpha">A–Z</button>
+      </div>
     </div>
     <div class="lib-grid" id="lib-grid"></div>
     <div class="prod-head"><span>Eigene Produkt-Datenbank</span><span class="prod-badge"><span id="prod-count">0</span> erfasst</span></div>
@@ -711,7 +800,7 @@ const shortLabel=l=>({Frühstück:'Frühst.',Mittagessen:'Mittag',Abendessen:'Ab
 
 // ===== Zwei Nutzer: eigene Pläne, Ziele, Koch-Sessions. Einkauf ist gemeinsam. =====
 const users=[
-  { key:'v', name:'Vincent', initial:'V', av:'v', base:2400, goal:'Aufbau ▲',
+  { key:'v', name:'Vincent', initial:'V', av:'v', accent:'lime', base:2400, goal:'Aufbau ▲',
     dates:['22.','23.','24.','25.','26.','27.','28.'],
     days:[
       {n:'Montag',act:'sport',today:true,meals:[{l:'Frühstück',id:2},{l:'Post-Workout',id:21}]},
@@ -724,7 +813,7 @@ const users=[
     ],
     cook:[{day:0,when:'Abend',id:5,portions:3,min:35},{day:2,when:'Abend',id:1,portions:3,min:30},{day:4,when:'Abend',id:3,portions:2,min:25}],
   },
-  { key:'x', name:'Xenia', initial:'X', av:'f', base:1600, goal:'Defizit ▼',
+  { key:'x', name:'Xenia', initial:'X', av:'f', accent:'pink', base:1600, goal:'Defizit ▼',
     dates:['22.','23.','24.','25.','26.','27.','28.'],
     days:[
       {n:'Montag',act:'sport',today:true,meals:[{l:'Frühstück',id:18},{l:'Snack',id:19}]},
@@ -751,6 +840,9 @@ function loadUser(i){
   days.forEach((d,idx)=>{d.d=users[i].dates[idx];}); // Datum ans days-Objekt
   calCook={}; cookSessions.forEach(s=>calCook[s.day]={id:s.id,portions:s.portions});
   autoPlanPrep();
+  days.forEach(d=>d.meals.forEach(e=>{ const m=mealById(e.id); if(!m)return;
+    m.usedAs=m.usedAs||{}; const k=['Frühstück','Mittagessen','Abendessen'].includes(e.l)?e.l:'Sonstiges';
+    if(!m.usedAs[k]) m.usedAs[k]=1; if(!m.useCount) m.useCount=1; }));
 }
 
 // AUTO: verteilt jede gekochte Portion auf Folgetage als Mahlzeit
@@ -799,8 +891,8 @@ function renderWeek(){
             </div>
             <div class="thumb" style="background:${m.g}" ${e.prep?'':`data-day="${i}" data-idx="${mi}" data-act="replace"`}>${m.emoji}</div>
             <div class="slot-info" ${e.prep?'':`data-day="${i}" data-idx="${mi}" data-act="replace"`}>
-              <div class="slot-label">${fmtTime(e.t??labelTime[e.l]??15*60)} · ${e.l}${e.prep?` · <span class="prep-tag">🍳 ${dayShort[e.cookDay]}</span>`:''}</div>
-              <div class="slot-meal">${m.name}</div>
+              <div class="slot-label"><span class="slot-type" data-day="${i}" data-idx="${mi}">${fmtTime(e.t??labelTime[e.l]??15*60)} · ${e.l} ✎</span>${e.prep?` · <span class="prep-tag">🍳 ${dayShort[e.cookDay]}</span>`:''}</div>
+              <div class="slot-meal slot-recipe" data-rec="${e.id}">${m.name}${m.cooked?' <span class="cooked-dot">🍲</span>':''}</div>
             </div>
             <div class="slot-kcal">${m.kcal}<span class="slot-g">${w?w+' g':''}</span></div>
             <button class="slot-del" data-day="${i}" data-idx="${mi}" data-act="del">×</button>
@@ -832,6 +924,8 @@ function renderWeek(){
   wk.querySelectorAll('.add-slot').forEach(b=>{
     b.onclick=()=>openPicker(+b.dataset.day, {mode:'add'});
   });
+  wk.querySelectorAll('.slot-type').forEach(el=>{ el.onclick=(e)=>{ e.stopPropagation(); openSlotType(+el.dataset.day, +el.dataset.idx, ()=>{renderWeek();renderTrack();}); }; });
+  wk.querySelectorAll('.slot-recipe').forEach(el=>{ el.onclick=(e)=>{ e.stopPropagation(); openRecipe(+el.dataset.rec); }; });
   wk.querySelectorAll('.ord-btn').forEach(b=>{
     b.onclick=()=>{
       const di=+b.dataset.day, pos=+b.dataset.pos, dir=+b.dataset.dir;
@@ -1076,60 +1170,97 @@ document.querySelectorAll('#week-seg button').forEach(b=>{
 
 // ---------- Picker ----------
 let pickLabel='Snack';
+// Nutzung einer Mahlzeit vermerken: Zähler, Datum, Slot-Typ
+function markUsed(id, label){
+  const m=mealById(id); if(!m) return;
+  m.useCount=(m.useCount||0)+1;
+  m.lastUsed=Date.now();
+  m.usedAs=m.usedAs||{};
+  const key=['Frühstück','Mittagessen','Abendessen'].includes(label)?label:'Sonstiges';
+  m.usedAs[key]=(m.usedAs[key]||0)+1;
+}
+function mealCategory(m){
+  if(!m.usedAs) return null;
+  let best=null,n=0; for(const k of ['Frühstück','Mittagessen','Abendessen']){ if((m.usedAs[k]||0)>n){n=m.usedAs[k];best=k;} }
+  return best;
+}
+
 function openPicker(di, opt){
   const m=document.getElementById('modal');
   const isAdd = opt.mode==='add';
-  if(isAdd) pickLabel='Snack';
+  if(isAdd && opt.label) pickLabel=opt.label;
+  else if(isAdd) pickLabel='Snack';
   const curLabel = isAdd?pickLabel:days[di].meals[opt.idx].l;
   m.innerHTML=`<div class="grab"></div>
     <h2>${isAdd?'Hinzufügen':'Ersetzen'} · ${days[di].n}</h2>
     <div class="mh-sub">${isAdd?'Typ wählen, dann Mahlzeit aus deiner Library':'Neue Mahlzeit für „'+curLabel+'“ wählen'}</div>
     ${isAdd?`<div class="lbl-row" id="lblRow">${mealLabels.map(l=>`<button class="lbl-chip ${l===pickLabel?'on':''}" data-l="${l}">${l}</button>`).join('')}</div>`:''}
-    <div id="pickList">${meals.map(me=>`<div class="pick" data-id="${me.id}">
-      <div class="thumb" style="background:${me.g}">${me.emoji}</div>
-      <div style="flex:1">
+    <div class="pick-search-row">
+      <input id="pickSearch" placeholder="🔍 Mahlzeit suchen">
+      <button class="scan-btn" id="pickScan" title="Barcode / Etikett">📷</button>
+    </div>
+    <div id="pickList"></div>`;
+  function renderPickList(q){
+    const list=m.querySelector('#pickList'); const qq=(q||'').toLowerCase();
+    const arr=meals.filter(me=>!qq||me.name.toLowerCase().includes(qq)).slice()
+      .sort((a,b)=>{
+        if(isAdd){ const ca=(a.usedAs&&a.usedAs[pickLabel])||0, cb=(b.usedAs&&b.usedAs[pickLabel])||0; if(cb!==ca) return cb-ca; }
+        return (b.lastUsed||0)-(a.lastUsed||0);
+      });
+    list.innerHTML=arr.map(me=>{const cat=mealCategory(me);
+      return `<div class="pick" data-id="${me.id}">
+      <div class="thumb" style="background:${me.g}">${me.photo?`<img src="${me.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:11px">`:me.emoji}</div>
+      <div style="flex:1;min-width:0">
         <div style="font-weight:600;font-size:14px">${me.name}</div>
-        <div class="meal-meta">${me.kcal} kcal · ${me.p}g P${me.quick?' · ⚡ schnell':''}</div>
+        <div class="meal-meta">${me.kcal} kcal · ${me.p}g P${cat?' · '+shortLabel(cat):''}</div>
       </div>
-    </div>`).join('')}</div>`;
+    </div>`;}).join('')||'<div style="color:var(--ink-soft);font-size:13px;padding:12px 2px">Kein Treffer.</div>';
+    list.querySelectorAll('.pick').forEach(p=>{
+      p.onclick=()=>{ const id=+p.dataset.id;
+        if(isAdd){ days[di].meals.push({l:pickLabel, id, t:labelTime[pickLabel]??15*60}); markUsed(id,pickLabel); }
+        else { const e=days[di].meals[opt.idx]; e.id=id; markUsed(id,e.l); }
+        closeModal(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderTrack(); saveState();
+        toast(isAdd?pickLabel+' hinzugefügt':'Ersetzt');
+        if(opt.onDone) opt.onDone();
+      };
+    });
+  }
   if(isAdd){
     m.querySelectorAll('.lbl-chip').forEach(c=>c.onclick=()=>{
       pickLabel=c.dataset.l;
       m.querySelectorAll('.lbl-chip').forEach(x=>x.classList.toggle('on',x.dataset.l===pickLabel));
+      renderPickList(m.querySelector('#pickSearch').value);
     });
   }
-  m.querySelectorAll('.pick').forEach(p=>{
-    p.onclick=()=>{
-      if(isAdd) days[di].meals.push({l:pickLabel, id:+p.dataset.id});
-      else days[di].meals[opt.idx].id=+p.dataset.id;
-      closeModal(); renderWeek(); saveState();
-      toast(isAdd?pickLabel+' hinzugefügt':'Ersetzt');
-    };
-  });
+  m.querySelector('#pickSearch').oninput=e=>renderPickList(e.target.value);
+  m.querySelector('#pickScan').onclick=()=>{
+    openScanner(p=>{
+      const id=nextMealId++;
+      meals.push({id, name:p.name, emoji:p.emoji||'🏷️', g:'linear-gradient(135deg,#2e2748,#1f1834)',
+        kcal:p.kcal||0, p:p.p||0, c:p.c||0, f:p.f||0, ings:[[p.name,100,(p.kcal||0)+' kcal/100g']]});
+      addUserProduct(p);
+      if(isAdd){ days[di].meals.push({l:pickLabel, id, t:labelTime[pickLabel]??15*60}); markUsed(id,pickLabel); }
+      else { const e=days[di].meals[opt.idx]; e.id=id; markUsed(id,e.l); }
+      closeModal(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderLib(); renderTrack(); saveState();
+      toast(p.name+' gescannt & eingeplant'); if(opt.onDone) opt.onDone();
+    }, ()=>{ openPicker(di,opt); });
+  };
+  renderPickList('');
   openModal();
 }
 
 // ---------- Library ----------
+let libCat='all', libSort='recent', libQuery='';
 function renderLib(){
-  document.getElementById('lib-count').textContent=`${meals.length} Mahlzeiten · wächst mit dir`;
-  const g=document.getElementById('lib-grid');
-  g.innerHTML = meals.map(m=>`
-    <div class="meal-card" data-id="${m.id}">
-      <div class="meal-photo" style="background:${m.g}">${m.photo?`<img src="${m.photo}" alt="" style="width:100%;height:100%;object-fit:cover">`:m.emoji}</div>
-      <div class="meal-body">
-        <div class="meal-name">${m.name}</div>
-        <div class="meal-meta"><span>${m.kcal} kcal</span><span>${m.p}g P</span></div>
-        <div class="meal-badges">
-          ${m.protein?'<span class="badge protein">High Protein</span>':''}
-          ${m.cheap?'<span class="badge cheap">Günstig</span>':''}
-        </div>
-      </div>
-    </div>`).join('') +
-    `<button class="add-card" id="addMeal"><div class="plus">+</div>Neue Mahlzeit</button>`;
-  g.querySelectorAll('.meal-card').forEach(c=>c.onclick=()=>openEditor(+c.dataset.id));
-  document.getElementById('addMeal').onclick=()=>openEditor(null);
-
-  // Eigene Produkt-Datenbank
+  document.querySelectorAll('#lf-cat .lf-chip').forEach(c=>{c.classList.toggle('on',c.dataset.cat===libCat);
+    c.onclick=()=>{libCat=c.dataset.cat; saveState();
+    document.querySelectorAll('#lf-cat .lf-chip').forEach(x=>x.classList.toggle('on',x.dataset.cat===libCat)); renderLib();};});
+  document.querySelectorAll('#lf-sort .lf-chip').forEach(c=>{c.classList.toggle('on',c.dataset.sort===libSort);
+    c.onclick=()=>{libSort=c.dataset.sort; saveState();
+    document.querySelectorAll('#lf-sort .lf-chip').forEach(x=>x.classList.toggle('on',x.dataset.sort===libSort)); renderLib();};});
+  const si=document.getElementById('lib-search');
+  if(si) si.oninput=()=>{libQuery=si.value; const p=si.selectionStart; renderLibGrid(); try{si.setSelectionRange(p,p);}catch(e){}};
+  renderLibGrid();
   const pl=document.getElementById('prod-list');
   document.getElementById('prod-count').textContent=userProducts.length;
   pl.innerHTML=userProducts.length?userProducts.map((u,idx)=>`
@@ -1143,6 +1274,33 @@ function renderLib(){
     </div>`).join('')
     :'<div style="color:var(--ink-soft);font-size:13px;padding:14px 2px">Noch keine erfassten Produkte. Scanne einen Barcode oder fotografiere ein Etikett — sie erscheinen automatisch hier.</div>';
   pl.querySelectorAll('.prod-row').forEach(r=>r.onclick=()=>openProductEdit(+r.dataset.idx));
+}
+function renderLibGrid(){
+  const g=document.getElementById('lib-grid'); const q=libQuery.toLowerCase();
+  let arr=meals.filter(m=>!q||m.name.toLowerCase().includes(q));
+  if(libCat!=='all') arr=arr.filter(m=>mealCategory(m)===libCat);
+  arr=arr.slice().sort((a,b)=>{
+    if(libSort==='alpha') return a.name.localeCompare(b.name,'de');
+    if(libSort==='protein') return (b.p||0)-(a.p||0);
+    if(libSort==='often') return (b.useCount||0)-(a.useCount||0) || (b.lastUsed||0)-(a.lastUsed||0);
+    return (b.lastUsed||0)-(a.lastUsed||0) || (b.useCount||0)-(a.useCount||0);
+  });
+  document.getElementById('lib-count').textContent=`${arr.length} von ${meals.length} Mahlzeiten`;
+  g.innerHTML = arr.map(m=>{const cat=mealCategory(m);
+    return `<div class="meal-card" data-id="${m.id}">
+      <div class="meal-photo" style="background:${m.g}">${m.photo?`<img src="${m.photo}" alt="" style="width:100%;height:100%;object-fit:cover">`:m.emoji}</div>
+      <div class="meal-body">
+        <div class="meal-name">${m.name}</div>
+        <div class="meal-meta"><span>${m.kcal} kcal</span><span>${m.p}g P</span>${m.useCount?`<span>${m.useCount}×</span>`:''}</div>
+        <div class="meal-badges">
+          ${cat?`<span class="badge cat">${shortLabel(cat)}</span>`:''}
+          ${m.protein?'<span class="badge protein">High Protein</span>':''}
+        </div>
+      </div>
+    </div>`;}).join('') +
+    `<button class="add-card" id="addMeal"><div class="plus">+</div>Neue Mahlzeit</button>`;
+  g.querySelectorAll('.meal-card').forEach(c=>c.onclick=()=>openEditor(+c.dataset.id));
+  document.getElementById('addMeal').onclick=()=>openEditor(null);
 }
 
 // Produkt bearbeiten / löschen / in Mahlzeit übernehmen
@@ -1422,6 +1580,7 @@ function openEditor(id){
   // Arbeits-Zustand
   let name = m.name;
   let photo = m.photo||null;                 // base64-Bild, falls hochgeladen
+  let steps = m.steps||'';
   // Zutaten mit Makros pro 100g: {name, amt, kcal, p, c, f}
   const ings = m.ings.map(x=>{const mac=ingMacros(x[0], parseFloat(x[2])); return {name:x[0], amt:x[1], ...mac};});
   // Makro-Overrides (wenn der Nutzer sie selbst setzt)
@@ -1536,10 +1695,15 @@ function openEditor(id){
         ${manual?`<button class="macro-reset" id="macroReset">↩︎ Zurück zur automatischen Berechnung</button>`:''}
       </div>
 
+      <div class="steps-field">
+        <label>Zubereitung (optional)</label>
+        <textarea id="edSteps" placeholder="Schritt für Schritt… z.B.&#10;1. Zwiebeln anbraten&#10;2. Hack dazu, krümelig braten&#10;3. Tomaten + Bohnen, 20 Min köcheln">${steps.replace(/</g,'&lt;')}</textarea>
+      </div>
       <button class="btn lime" id="saveMeal">${m._new?'Gericht anlegen':'Änderungen speichern'}</button>`;
 
     // Name
     document.getElementById('edName').oninput=e=>{name=e.target.value;};
+    const st=document.getElementById('edSteps'); if(st) st.oninput=e=>{steps=e.target.value;};
     // Foto-Upload (echtes Bild)
     document.getElementById('edPhoto').onclick=()=>document.getElementById('photoInput').click();
     document.getElementById('photoInput').onchange=async e=>{
@@ -1615,6 +1779,7 @@ function openEditor(id){
       target.kcal=fin.kcal; target.p=fin.p; target.c=fin.c; target.f=fin.f;
       target.macroManual=manual;
       target.ings=ings.map(x=>[x.name, x.amt, `${x.kcal} kcal/100g`]);
+      target.steps=steps;
       target.protein=fin.p>=20; target.quick=target.quick||false;
       if(m._new) meals.push(target);
       closeModal(); renderLib(); saveState();
@@ -1636,34 +1801,50 @@ function renderTrack(){
      <button class="goal-edit" id="goalEdit">✏️ Ziel</button>`;
   document.getElementById('goalEdit').onclick=openGoalEdit;
   const list=document.getElementById('track-list');
-  if(!tm.length){list.innerHTML='<div style="color:var(--ink-soft);font-size:14px;padding:20px;text-align:center">Für heute noch nichts geplant.</div>';updateRing();return;}
-  list.innerHTML=tm.map((t,i)=>{const m=mealById(t.id);return`
+  const di=days.findIndex(d=>d.today); const dIdx=di<0?0:di;
+  const addBtn=`<button class="track-add" id="trackAdd">+ Mahlzeit hinzufügen oder scannen</button>`;
+  const ord=tm.map((t,i)=>({t,i})).sort((a,b)=>((a.t.t??labelTime[a.t.l]??900)-(b.t.t??labelTime[b.t.l]??900)));
+  if(!tm.length){ list.innerHTML='<div style="color:var(--ink-soft);font-size:14px;padding:20px 0;text-align:center">Für heute noch nichts geplant.</div>'+addBtn;
+    document.getElementById('trackAdd').onclick=()=>openPicker(dIdx,{mode:'add',onDone:renderTrack});
+    updateRing(); return; }
+  list.innerHTML=ord.map(({t,i})=>{const m=mealById(t.id); const mac=entryMacros(t);return`
     <div class="track-meal ${t.done?'done':''}">
-      <div class="tm-thumb" style="background:${m.g}">${m.emoji}</div>
-      <div class="tm-info">
-        <div class="tm-label">${t.l}${t.prep?' · 🍳':''}</div>
+      <div class="tm-thumb" style="background:${m.g}" data-rec="${t.id}">${m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:11px">`:m.emoji}</div>
+      <div class="tm-info" data-rec="${t.id}">
+        <div class="tm-label"><span class="tm-type" data-type="${i}">${fmtTime(t.t??labelTime[t.l]??15*60)} · ${t.l} ✎</span>${t.prep?' · 🍳':''}</div>
         <div class="tm-name">${m.name}</div>
-        <div class="tm-kcal">${m.kcal} kcal · ${m.p}g Protein</div>
+        <div class="tm-kcal">${mac.kcal} kcal · ${mac.p}g Protein${mac.cooked?`<span class="cooked-pill">🍲 ${cookedDateStr(mac.date)}</span>`:''}</div>
       </div>
+      <button class="tm-del" data-i="${i}">×</button>
       <button class="check ${t.done?'on':''}" data-i="${i}">✓</button>
-    </div>`;}).join('');
+    </div>`;}).join('')+addBtn;
   list.querySelectorAll('.check').forEach(c=>{
-    c.onclick=()=>{const t=tm[+c.dataset.i];t.done=!t.done; renderTrack(); updateRing(); saveState();};
+    c.onclick=()=>{const t=tm[+c.dataset.i]; t.done=!t.done;
+      const m=mealById(t.id);
+      if(m&&m.cooked){ adjustPortions(t.id, t.done?-1:+1); }  // gegessen → Portion weg, zurück → zurück
+      renderTrack(); renderWeek(); saveState();};
   });
+  list.querySelectorAll('.tm-del').forEach(b=>{
+    b.onclick=(e)=>{ e.stopPropagation(); tm.splice(+b.dataset.i,1); renderTrack(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); saveState(); };
+  });
+  list.querySelectorAll('.tm-type').forEach(el=>{ el.onclick=(e)=>{ e.stopPropagation(); openSlotType(dIdx, +el.dataset.type, renderTrack); }; });
+  list.querySelectorAll('[data-rec]').forEach(el=>{ el.onclick=(e)=>{ if(e.target.closest('.tm-type'))return; openRecipe(+el.dataset.rec); }; });
+  document.getElementById('trackAdd').onclick=()=>openPicker(dIdx,{mode:'add',onDone:renderTrack});
   updateRing();
 }
 function updateRing(){
   const tm=todayMeals();const d=todayDay();
   const tgt=target(d);
   const done=tm.filter(t=>t.done);
-  const eaten=done.reduce((s,t)=>s+mealById(t.id).kcal,0);
+  const macs=done.map(entryMacros);
+  const eaten=macs.reduce((s,x)=>s+x.kcal,0);
   document.getElementById('tKcal').textContent=eaten;
   document.getElementById('tTarget').textContent='/ '+tgt+' kcal';
   const remain=tgt-eaten;
   document.getElementById('tRemain').textContent=`${remain>=0?'Noch '+remain+' kcal übrig':Math.abs(remain)+' kcal über Ziel'} · ${actLabel[d.act]}`;
   const circ=326.7;
   document.getElementById('ringFill').style.strokeDashoffset=Math.max(0,circ*(1-eaten/tgt));
-  const sum=k=>done.reduce((s,t)=>s+mealById(t.id)[k],0);
+  const sum=k=>macs.reduce((s,x)=>s+x[k],0);
   document.getElementById('mP').textContent=sum('p')+'g';
   document.getElementById('mC').textContent=sum('c')+'g';
   document.getElementById('mF').textContent=sum('f')+'g';
@@ -1732,6 +1913,202 @@ const readyStock=[
   {id:5, portions:3, freshLeft:3, freshMax:4},   // Linsen-Curry, So gekocht, hält 4 Tage
   {id:2, portions:2, freshLeft:2, freshMax:3},   // Overnight Oats
 ];
+
+// ===== Töpfe (gemeinsamer Speicher): {id,name,emoji,tare(g),photo} =====
+let pots=[
+  {id:1, name:'Großer Topf', emoji:'🍲', tare:1200, photo:null},
+  {id:2, name:'Pfanne', emoji:'🍳', tare:900, photo:null},
+];
+let nextPotId=3;
+
+// ===== Koch-Charge: aus tatsächlichen Zutaten + Nettogewicht → Makros pro 100g =====
+function applyCook(m, cookIngs, grossG, tareG, portionG){
+  const net=Math.max(1, grossG - tareG);
+  let kcal=0,p=0,c=0,f=0;
+  cookIngs.forEach(x=>{ const mac=ingMacros(x[0], parseFloat((x[2]||'').toString())); const g=parseFloat(x[1])||0; const r=g/100;
+    kcal+=mac.kcal*r; p+=mac.p*r; c+=mac.c*r; f+=mac.f*r; });
+  const per100={ kcal:Math.round(kcal/net*100), p:+(p/net*100).toFixed(1), c:+(c/net*100).toFixed(1), f:+(f/net*100).toFixed(1) };
+  const pG=portionG||150;
+  const portions=Math.round(net/pG*2)/2;   // in halben Portionen
+  m.cooked={ date:Date.now(), netG:Math.round(net), grossG, tareG, per100, portionG:pG,
+    portionsTotal:portions, portionsLeft:portions, ings:cookIngs.map(x=>[x[0],x[1],x[2]]) };
+}
+// Portionen-Vorrat verändern (gemeinsam mit Xenia synchron)
+function adjustPortions(id, delta){
+  const m=mealById(id); if(!m||!m.cooked) return;
+  m.cooked.portionsLeft=Math.max(0, Math.round((( m.cooked.portionsLeft||0)+delta)*2)/2);
+  saveState();
+}
+// Makros einer EINGEPLANTEN Mahlzeit: nutzt die aktuelle Charge, wenn vorhanden
+function entryMacros(entry){
+  const m=mealById(entry.id); if(!m) return {kcal:0,p:0,c:0,f:0,cooked:false};
+  if(m.cooked){ const g=entry.g||m.cooked.portionG||150; const r=g/100; const q=m.cooked.per100;
+    return {kcal:Math.round(q.kcal*r), p:Math.round(q.p*r), c:Math.round(q.c*r), f:Math.round(q.f*r), cooked:true, date:m.cooked.date}; }
+  return {kcal:m.kcal, p:m.p, c:m.c, f:m.f, cooked:false};
+}
+function cookedDateStr(ts){ const d=new Date(ts); const dys=Math.floor((Date.now()-ts)/86400000);
+  const dd=d.getDate()+'.'+(d.getMonth()+1)+'.'; return dys<=0?'heute':dys===1?'gestern':dd; }
+
+// ===== Slot-Typ einer eingeplanten Mahlzeit ändern =====
+function openSlotType(di, idx, onDone){
+  const e=days[di].meals[idx]; const mod=document.getElementById('modal');
+  mod.innerHTML=`<div class="grab"></div>
+    <h2>Als was einplanen?</h2>
+    <div class="mh-sub">${mealById(e.id).name} · ${days[di].n}</div>
+    <div class="type-grid">${mealLabels.map(l=>`<button class="type-opt ${l===e.l?'on':''}" data-l="${l}">${l}</button>`).join('')}</div>`;
+  mod.querySelectorAll('.type-opt').forEach(b=>b.onclick=()=>{
+    e.l=b.dataset.l; e.t=labelTime[e.l]??e.t; markUsed(e.id,e.l);
+    closeModal(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderTrack(); saveState();
+    toast('Als '+e.l+' eingeplant'); if(onDone)onDone();
+  });
+  openModal();
+}
+
+// ===== Rezept ansehen / bearbeiten (aus Kochen/Essen) =====
+function openRecipe(id){
+  const m=mealById(id); if(!m) return; const mod=document.getElementById('modal');
+  const w=mealWeight(m);
+  mod.innerHTML=`<div class="grab"></div>
+    <div class="ed-photo" style="${m.photo?'':'background:'+m.g}">${m.photo?`<img src="${m.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px">`:m.emoji}</div>
+    <h2>${m.name}</h2>
+    <div class="mh-sub">${m.kcal} kcal · ${m.p}g P / ${m.c}g C / ${m.f}g F${w?' · '+w+' g Rezept':''}</div>
+    ${m.cooked?`<div class="cooked-note">🍲 Gekocht ${cookedDateStr(m.cooked.date)} · ${m.cooked.per100.kcal} kcal/100g · Portion ${m.cooked.portionG} g</div>
+    <div class="portion-box">
+      <div class="pb-label">Noch übrig</div>
+      <div class="pb-ctrl">
+        <button class="pb-btn" id="pMinus">−½</button>
+        <div class="pb-val"><span id="pLeft">${m.cooked.portionsLeft}</span><small>/ ${m.cooked.portionsTotal} Portionen</small></div>
+        <button class="pb-btn" id="pPlus">+½</button>
+      </div>
+    </div>`:''}
+    <div class="recipe-ings">${(m.ings||[]).map(x=>`<div class="ri-line"><span>${x[0]}</span><span>${x[1]} g</span></div>`).join('')||'<div style="color:var(--ink-soft);font-size:13px;padding:8px 0">Noch keine Zutaten.</div>'}</div>
+    ${m.steps?`<div class="recipe-steps-label">Zubereitung</div><div class="recipe-steps">${m.steps.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div>`:''}
+    <button class="btn lime" id="recCook">🍲 Große Portion kochen</button>
+    <button class="btn" id="recEdit">✏️ Rezept bearbeiten</button>`;
+  mod.querySelector('#recEdit').onclick=()=>openEditor(id);
+  mod.querySelector('#recCook').onclick=()=>openCookSession(id);
+  if(m.cooked){
+    const upd=()=>{ const el=mod.querySelector('#pLeft'); if(el) el.textContent=m.cooked.portionsLeft;
+      renderTrack(); if(typeof renderCalendar==='function')renderCalendar(); };
+    mod.querySelector('#pMinus').onclick=()=>{ adjustPortions(id,-0.5); upd(); };
+    mod.querySelector('#pPlus').onclick=()=>{ adjustPortions(id,0.5); upd(); };
+  }
+  openModal();
+}
+
+// ===== Große Portion kochen: Zutaten (Rezept=Standard) + Topf-Wägung → Makros/100g =====
+function openCookSession(id){
+  const m=mealById(id); if(!m) return; const mod=document.getElementById('modal');
+  // Arbeits-Zutaten: letzte Charge, sonst Rezept
+  const src = (m.cooked&&m.cooked.ings&&m.cooked.ings.length)?m.cooked.ings:(m.ings||[]);
+  let cIngs = src.map(x=>[x[0], parseFloat(x[1])||0, x[2]||'']);
+  let potId = (m.cooked&&m.cooked.potId) || (pots[0]&&pots[0].id) || null;
+  let gross = (m.cooked&&m.cooked.grossG) || '';
+  let portionG = (m.cooked&&m.cooked.portionG) || 150;
+  function tare(){ const p=pots.find(x=>x.id===potId); return p?p.tare:0; }
+  function preview(){
+    const g=parseFloat(gross)||0; const net=Math.max(0,g-tare());
+    let kc=0,pp=0,cc=0,ff=0; cIngs.forEach(x=>{const mac=ingMacros(x[0],parseFloat(x[2]));const gr=parseFloat(x[1])||0;const r=gr/100;kc+=mac.kcal*r;pp+=mac.p*r;cc+=mac.c*r;ff+=mac.f*r;});
+    return {net, per100:net>0?{kcal:Math.round(kc/net*100),p:+(pp/net*100).toFixed(1),c:+(cc/net*100).toFixed(1),f:+(ff/net*100).toFixed(1)}:null, total:Math.round(kc)};
+  }
+  function draw(){
+    const pv=preview();
+    mod.innerHTML=`<div class="grab"></div>
+      <h2>🍲 ${m.name} kochen</h2>
+      <div class="mh-sub">Zutaten-Gramm fürs heutige Kochen anpassen (Rezept ist voreingestellt).</div>
+      <div id="cookIngs">${cIngs.map((x,i)=>`<div class="ing">
+        <div class="ing-name">${x[0]}<small>${ingMacros(x[0],parseFloat(x[2])).kcal} kcal/100g</small></div>
+        <div class="stepper"><button data-i="${i}" data-s="-1">−</button>
+          <input class="amt num" data-i="${i}" value="${x[1]}" inputmode="numeric"><button data-i="${i}" data-s="1">+</button></div>
+        <span style="font-size:12px;color:var(--ink-soft)">g</span>
+        <button class="ing-del" data-del="${i}">×</button>
+      </div>`).join('')}</div>
+      <button class="track-add" id="cookAddIng">+ Zutat</button>
+
+      <div class="cook-weigh">
+        <div class="cw-title">Nach dem Kochen wiegen</div>
+        <div class="ocr-field"><label>Topf</label>
+          <select id="potSel" class="pot-sel">${pots.map(p=>`<option value="${p.id}" ${p.id===potId?'selected':''}>${p.emoji} ${p.name} (${p.tare} g)</option>`).join('')}<option value="__new">➕ Neuer Topf…</option></select>
+        </div>
+        <div class="ocr-field"><label>Gesamt mit Topf (g)</label><input id="grossIn" inputmode="numeric" value="${gross}" placeholder="z.B. 3200"></div>
+        <div class="ocr-field"><label>Portionsgröße (g)</label><input id="portIn" inputmode="numeric" value="${portionG}" placeholder="z.B. 350"></div>
+        <div class="weigh-calc">
+          <div>Essen netto: <b>${pv.net||0} g</b>${pv.net>0?` · <b>${Math.round(pv.net/portionG*2)/2}</b> Portionen`:''}</div>
+          ${pv.per100?`<div class="per100">${pv.per100.kcal} kcal · ${pv.per100.p}P / ${pv.per100.c}C / ${pv.per100.f}F <span>pro 100 g</span></div>`:'<div style="color:var(--ink-soft);font-size:12px">Topf &amp; Gesamtgewicht eingeben für Makros/100g</div>'}
+        </div>
+      </div>
+      <button class="btn lime" id="cookSave">Charge speichern</button>`;
+    // Stepper/Mengen
+    mod.querySelectorAll('.stepper button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;cIngs[i][1]=Math.max(0,(parseFloat(cIngs[i][1])||0)+(+b.dataset.s)*((cIngs[i][1]>=50)?10:1));draw();});
+    mod.querySelectorAll('.amt').forEach(inp=>inp.oninput=()=>{cIngs[+inp.dataset.i][1]=parseFloat(inp.value)||0; const pv=preview();
+      const pc=mod.querySelector('.weigh-calc'); if(pc) pc.innerHTML=`<div>Essen netto: <b>${pv.net||0} g</b>${pv.net>0?` · <b>${Math.round(pv.net/portionG*2)/2}</b> Portionen`:''}</div>${pv.per100?`<div class="per100">${pv.per100.kcal} kcal · ${pv.per100.p}P / ${pv.per100.c}C / ${pv.per100.f}F <span>pro 100 g</span></div>`:''}`;});
+    mod.querySelectorAll('.ing-del').forEach(b=>b.onclick=()=>{cIngs.splice(+b.dataset.del,1);draw();});
+    mod.querySelector('#cookAddIng').onclick=()=>{ openIngPicker(name=>{ const mac=ingMacros(name); cIngs.push([name,100,mac.kcal+' kcal/100g']); draw(); }); };
+    // Topf-Auswahl
+    mod.querySelector('#potSel').onchange=e=>{ if(e.target.value==='__new'){ openPotEdit(null, newId=>{ potId=newId; draw(); }); } else { potId=+e.target.value; draw(); } };
+    const updCalc=()=>{ const pv=preview(); const pc=mod.querySelector('.weigh-calc');
+      if(pc) pc.innerHTML=`<div>Essen netto: <b>${pv.net||0} g</b>${pv.net>0?` · <b>${Math.round(pv.net/portionG*2)/2}</b> Portionen`:''}</div>${pv.per100?`<div class="per100">${pv.per100.kcal} kcal · ${pv.per100.p}P / ${pv.per100.c}C / ${pv.per100.f}F <span>pro 100 g</span></div>`:'<div style="color:var(--ink-soft);font-size:12px">Gesamtgewicht eingeben</div>'}`; };
+    mod.querySelector('#grossIn').oninput=e=>{ gross=e.target.value; updCalc(); };
+    mod.querySelector('#portIn').oninput=e=>{ portionG=parseFloat(e.target.value)||150; updCalc(); };
+    mod.querySelector('#cookSave').onclick=()=>{
+      const g=parseFloat(gross)||0; if(g<=tare()){ toast('Gesamtgewicht muss größer als der Topf sein'); return; }
+      applyCook(m, cIngs, g, tare(), portionG); m.cooked.potId=potId;
+      closeModal(); renderCook(); renderTrack(); renderLib(); saveState();
+      toast(m.name+': '+m.cooked.portionsTotal+' Portionen · '+m.cooked.per100.kcal+' kcal/100g');
+    };
+  }
+  draw(); openModal();
+}
+
+// kleiner Zutaten-Picker (für +Zutat in der Koch-Session)
+function openIngPicker(onPick){
+  const mod=document.getElementById('modal'); let q='';
+  function draw(){
+    const hits=offDB.filter(o=>!q||o[0].toLowerCase().includes(q.toLowerCase())).slice(0,8);
+    mod.innerHTML=`<div class="grab"></div><h2>Zutat hinzufügen</h2>
+      <div class="add-ing"><input id="ipS" placeholder="🔍 Zutat suchen" value="${q.replace(/"/g,'&quot;')}"></div>
+      <div class="off-res" style="margin-top:10px">${hits.map(h=>`<div class="off-hit" data-n="${h[0]}"><div><div class="ohn">${h[0]}</div><div class="ohk">${h[1]} kcal/100g</div></div><span class="ohadd">+</span></div>`).join('')}</div>
+      <button class="scan-back" id="ipBack" style="margin-top:10px">Zurück</button>`;
+    const si=mod.querySelector('#ipS'); si.oninput=()=>{q=si.value;const p=si.selectionStart;draw();const n=mod.querySelector('#ipS');n.focus();try{n.setSelectionRange(p,p);}catch(e){}};
+    mod.querySelectorAll('.off-hit').forEach(h=>h.onclick=()=>{onPick(h.dataset.n);});
+    mod.querySelector('#ipBack').onclick=()=>{ closeModal(); };
+  }
+  draw();
+}
+
+// ===== Topf anlegen / bearbeiten =====
+function openPotEdit(potIdOrNull, onDone){
+  const mod=document.getElementById('modal');
+  const existing = potIdOrNull?pots.find(p=>p.id===potIdOrNull):null;
+  let name=existing?existing.name:''; let tare=existing?existing.tare:''; let emoji=existing?existing.emoji:'🍲'; let photo=existing?existing.photo:null;
+  function draw(){
+    mod.innerHTML=`<div class="grab"></div>
+      <h2>${existing?'Topf bearbeiten':'Neuer Topf'}</h2>
+      <div class="mh-sub">Leergewicht eingeben — es wird beim Kochen automatisch abgezogen.</div>
+      <div class="ed-photo" id="potPhoto" style="${photo?'':'background:var(--card-2)'}">${photo?`<img src="${photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px">`:emoji}<div class="cam">📷 Foto</div></div>
+      <input type="file" id="potPhotoIn" accept="image/*" style="display:none">
+      <div class="ocr-field"><label>Name</label><input class="name" id="potName" value="${name.replace(/"/g,'&quot;')}" placeholder="z.B. Großer Topf"></div>
+      <div class="ocr-field"><label>Leergewicht (g)</label><input id="potTare" inputmode="numeric" value="${tare}" placeholder="z.B. 1200"></div>
+      <button class="btn lime" id="potSave">Speichern</button>
+      ${existing?`<button class="scan-back" id="potDel" style="color:var(--coral);border-color:rgba(255,111,92,.4)">Topf löschen</button>`:''}`;
+    mod.querySelector('#potPhoto').onclick=()=>mod.querySelector('#potPhotoIn').click();
+    mod.querySelector('#potPhotoIn').onchange=async e=>{const f=e.target.files[0];if(!f)return;
+      const rd=new FileReader(); rd.onload=ev=>{photo=ev.target.result;draw();}; rd.readAsDataURL(f);
+      if(typeof sb!=='undefined'&&sb){ try{ const path=HOUSEHOLD+'/pot-'+Date.now()+'.jpg';
+        const{error}=await sb.storage.from('fotos').upload(path,f,{upsert:true,contentType:f.type||'image/jpeg'});
+        if(!error){const{data}=sb.storage.from('fotos').getPublicUrl(path); if(data&&data.publicUrl){photo=data.publicUrl;draw();}} }catch(_){}}};
+    mod.querySelector('#potName').oninput=e=>name=e.target.value;
+    mod.querySelector('#potTare').oninput=e=>tare=e.target.value;
+    mod.querySelector('#potSave').onclick=()=>{
+      const t=parseFloat(tare)||0; if(!name.trim()||t<=0){toast('Name und Leergewicht angeben');return;}
+      if(existing){ existing.name=name.trim(); existing.tare=t; existing.photo=photo; saveState(); closeModal(); toast('Topf gespeichert'); if(onDone)onDone(existing.id); }
+      else { const np={id:nextPotId++, name:name.trim(), emoji, tare:t, photo}; pots.push(np); saveState(); closeModal(); toast('Topf angelegt'); if(onDone)onDone(np.id); }
+    };
+    const del=mod.querySelector('#potDel'); if(del) del.onclick=()=>{ pots=pots.filter(p=>p.id!==existing.id); saveState(); closeModal(); toast('Topf gelöscht'); if(onDone)onDone(null); };
+  }
+  draw(); openModal();
+}
+
 function renderCook(){
   // Parat-Liste
   const rl=document.getElementById('ready-list');
@@ -1767,19 +2144,30 @@ function renderCook(){
       </div>
       <div style="font-size:11px;color:var(--ink-soft);font-weight:600;margin-bottom:6px">Automatisch eingeplant für:</div>
       <div class="covers">${covers.map(c=>`<span class="cov">${c}</span>`).join('')}</div>
-      <button class="cook-btn ${now?'':'ghost'}" data-i="${i}">${now?'Jetzt kochen — Schritte anzeigen':'Erinnerung setzen'}</button>
+      ${mealById(s.id).cooked?`<div class="cooked-note" style="margin-bottom:8px">🍲 Gekocht ${cookedDateStr(mealById(s.id).cooked.date)} · ${mealById(s.id).cooked.per100.kcal} kcal/100g</div>`:''}
+      <button class="cook-btn" data-cook="${s.id}">🍲 Jetzt kochen &amp; wiegen</button>
+      <button class="cook-btn ghost" data-recipe="${s.id}" style="margin-top:6px">Rezept ansehen</button>
     </div>`;}).join('');
-  document.getElementById('cook-list').querySelectorAll('.cook-btn').forEach(b=>{
-    b.onclick=()=>{const s=cookSessions[+b.dataset.i];const now=s.day===todayIdx;
-      toast(now?`${mealById(s.id).name}: ${s.portions} Portionen — los!`:`Erinnerung: ${days[s.day].n} ${s.when} kochen`);};
-  });
-  // Quick meals
+  document.getElementById('cook-list').querySelectorAll('[data-cook]').forEach(b=>{
+    b.onclick=()=>openCookSession(+b.dataset.cook);});
+  document.getElementById('cook-list').querySelectorAll('[data-recipe]').forEach(b=>{
+    b.onclick=()=>openRecipe(+b.dataset.recipe);});
+  // Quick meals → Rezept-Fenster
   document.getElementById('quick-row').innerHTML=meals.filter(m=>m.quick).map(m=>`
     <div class="quick-card" data-id="${m.id}">
-      <div class="qp" style="background:${m.g}">${m.emoji}<span class="mins">${m.id===2?'2 Min':'8 Min'}</span></div>
+      <div class="qp" style="background:${m.g}">${m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover">`:m.emoji}</div>
       <div class="qb"><div class="qn">${m.name}</div><div class="qk">${m.kcal} kcal · ${m.p}g P</div></div>
     </div>`).join('');
-  document.getElementById('quick-row').querySelectorAll('.quick-card').forEach(c=>c.onclick=()=>openEditor(+c.dataset.id));
+  document.getElementById('quick-row').querySelectorAll('.quick-card').forEach(c=>c.onclick=()=>openRecipe(+c.dataset.id));
+  // Topf-Speicher
+  const potWrap=document.getElementById('pot-list');
+  if(potWrap){ potWrap.innerHTML=pots.map(p=>`<div class="pot-card" data-pot="${p.id}">
+      <div class="pot-img" style="${p.photo?'':'background:var(--card-2)'}">${p.photo?`<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover">`:p.emoji}</div>
+      <div class="pot-info"><div class="pot-name">${p.name}</div><div class="pot-tare">${p.tare} g leer</div></div>
+    </div>`).join('')+`<button class="pot-card add" id="potAdd"><div class="pot-img" style="background:none;border:1.5px dashed var(--line)">+</div><div class="pot-info"><div class="pot-name">Neuer Topf</div></div></button>`;
+    potWrap.querySelectorAll('.pot-card[data-pot]').forEach(c=>c.onclick=()=>openPotEdit(+c.dataset.pot,()=>renderCook()));
+    potWrap.querySelector('#potAdd').onclick=()=>openPotEdit(null,()=>renderCook());
+  }
 }
 
 // ---------- Nav / Modal / Toast ----------
@@ -1808,16 +2196,21 @@ function snapshotState(){
   return {
     v:1,
     users: users.map(u=>({
-      base:u.base, goal:u.goal,
+      base:u.base, goal:u.goal, accent:u.accent||'lime',
       days:u.days.map(d=>({act:d.act, meals:d.meals.map(e=>({l:e.l,id:e.id,prep:!!e.prep,cookDay:e.cookDay,done:!!e.done,t:e.t,dur:e.dur}))})),
       cook:u.cook.map(c=>({day:c.day,when:c.when,id:c.id,portions:c.portions,min:c.min})),
     })),
     meals: meals.filter(m=>m.id>=100).map(m=>({id:m.id,name:m.name,emoji:m.emoji,g:m.g,photo:m.photo||null,
-      kcal:m.kcal,p:m.p,c:m.c,f:m.f,macroManual:!!m.macroManual,protein:!!m.protein,quick:!!m.quick,ings:m.ings})),
+      kcal:m.kcal,p:m.p,c:m.c,f:m.f,macroManual:!!m.macroManual,protein:!!m.protein,quick:!!m.quick,ings:m.ings,steps:m.steps||''})),
     userProducts: userProducts,
     offDBExtra: offDB.slice(45),   // nur selbst hinzugefügte Zutaten (Basis = erste 45)
     nextMealId: (typeof nextMealId!=='undefined'?nextMealId:100),
     times: {cookTime, shopTime, cookDur, shopDur},
+    pots: pots, nextPotId: nextPotId,
+    cooked: meals.filter(m=>m.cooked).map(m=>({id:m.id, cooked:m.cooked})),
+    usage: meals.filter(m=>m.useCount||m.usedAs).map(m=>({id:m.id, useCount:m.useCount||0, lastUsed:m.lastUsed||0, usedAs:m.usedAs||{}})),
+    filters: {libCat, libSort},
+    steps: meals.filter(m=>m.steps).map(m=>({id:m.id, steps:m.steps})),
   };
 }
 // Übernimmt einen geladenen Zustand in die Live-Objekte
@@ -1828,6 +2221,7 @@ function applyState(s){
     s.users.forEach((su,i)=>{ if(!users[i])return;
       if(su.base!=null)users[i].base=su.base;
       if(su.goal)users[i].goal=su.goal;
+      if(su.accent)users[i].accent=su.accent;
       if(Array.isArray(su.days)) su.days.forEach((sd,di)=>{ if(!users[i].days[di])return;
         if(sd.act)users[i].days[di].act=sd.act;
         if(Array.isArray(sd.meals)) users[i].days[di].meals=sd.meals.map(e=>({...e}));
@@ -1844,6 +2238,12 @@ function applyState(s){
     if(s.nextMealId && typeof nextMealId!=='undefined' && s.nextMealId>nextMealId) nextMealId=s.nextMealId;
     if(s.times){ Object.assign(cookTime,s.times.cookTime||{}); Object.assign(shopTime,s.times.shopTime||{});
       Object.assign(cookDur,s.times.cookDur||{}); Object.assign(shopDur,s.times.shopDur||{}); }
+    if(Array.isArray(s.pots)){ pots=s.pots.map(p=>({...p})); }
+    if(s.nextPotId && s.nextPotId>nextPotId) nextPotId=s.nextPotId;
+    if(Array.isArray(s.cooked)) s.cooked.forEach(cm=>{const m=mealById(cm.id); if(m) m.cooked=cm.cooked;});
+    if(Array.isArray(s.usage)) s.usage.forEach(um=>{const m=mealById(um.id); if(m){m.useCount=um.useCount;m.lastUsed=um.lastUsed;m.usedAs=um.usedAs;}});
+    if(s.filters){ if(s.filters.libCat)libCat=s.filters.libCat; if(s.filters.libSort)libSort=s.filters.libSort; }
+    if(Array.isArray(s.steps)) s.steps.forEach(x=>{const m=mealById(x.id); if(m) m.steps=x.steps;});
     loadUser(au);          // days/cookSessions/calCook + Auto-Prep neu aufbauen
   }finally{ applyingRemote=false; }
 }
@@ -1894,15 +2294,51 @@ async function loadRemote(){
   if(error) throw error; return data;
 }
 
+// ---------- Akzentfarben (pro Person) ----------
+// [key]: {name, main, deep, glowRGB}
+const ACCENTS={
+  lime:  {name:'Limette', main:'#c8f24e', deep:'#a8d43a', rgb:'200,242,78'},
+  mint:  {name:'Mint',    main:'#4fe3b0', deep:'#2fc593', rgb:'79,227,176'},
+  sky:   {name:'Himmel',  main:'#5bc8f5', deep:'#3aa8db', rgb:'91,200,245'},
+  violet:{name:'Lila',    main:'#b58cff', deep:'#9a6ef0', rgb:'181,140,255'},
+  pink:  {name:'Pink',    main:'#ff7ec2', deep:'#ec5aa6', rgb:'255,126,194'},
+  coral: {name:'Koralle', main:'#ff8a6b', deep:'#ee6548', rgb:'255,138,107'},
+  orange:{name:'Orange',  main:'#ffb24a', deep:'#e8972e', rgb:'255,178,74'},
+  red:   {name:'Rot',     main:'#ff6f6f', deep:'#e84f4f', rgb:'255,111,111'},
+};
+function applyTheme(){
+  const a=ACCENTS[(U().accent)||'lime']||ACCENTS.lime;
+  const r=document.documentElement.style;
+  r.setProperty('--lime', a.main);
+  r.setProperty('--lime-deep', a.deep);
+  r.setProperty('--glow', '0 0 24px rgba('+a.rgb+',.18)');
+}
+function openAccentPicker(){
+  const mod=document.getElementById('modal');
+  mod.innerHTML=`<div class="grab"></div>
+    <h2>Farbe · ${U().name}</h2>
+    <div class="mh-sub">Deine Akzentfarbe — nur für dich, Xenia hat ihre eigene.</div>
+    <div class="accent-grid">${Object.entries(ACCENTS).map(([k,a])=>`
+      <button class="accent-opt ${((U().accent)||'lime')===k?'on':''}" data-k="${k}">
+        <span class="ac-dot" style="background:linear-gradient(135deg,${a.main},${a.deep})"></span>
+        <span class="ac-name">${a.name}</span>
+      </button>`).join('')}</div>`;
+  mod.querySelectorAll('.accent-opt').forEach(b=>b.onclick=()=>{
+    U().accent=b.dataset.k; applyTheme(); saveState();
+    mod.querySelectorAll('.accent-opt').forEach(x=>x.classList.toggle('on',x.dataset.k===b.dataset.k));
+    toast(ACCENTS[b.dataset.k].name+' gewählt');
+  });
+  openModal();
+}
+
 // init
 // ---------- Nutzer-Umschalter ----------
 function renderAll(){renderWeek();renderCalendar();renderCook();renderTrack();renderShop();
-  // Woche-Kopf aktualisieren
   document.getElementById('week-sub').textContent=`${U().name} · Ziel ${U().goal}`;
 }
 function switchUser(i){
-  if(i===au) return;
-  loadUser(i);
+  if(i===au){ openAccentPicker(); return; }   // Tipp auf aktiven Avatar → Farbwahl
+  loadUser(i); applyTheme();
   document.querySelectorAll('#userSwitch .av').forEach(a=>a.classList.toggle('on',+a.dataset.u===i));
   renderAll();
   toast('Ansicht: '+U().name);
@@ -1912,6 +2348,7 @@ document.querySelectorAll('#userSwitch .av').forEach(a=>{
 });
 document.getElementById('week-sub').textContent=`${U().name} · Ziel ${U().goal}`;
 
+applyTheme();
 renderWeek();renderCalendar();renderCook();renderLib();renderTrack();renderShop();
 initStore();
 </script>
