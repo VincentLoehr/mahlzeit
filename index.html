@@ -68,7 +68,7 @@
       var(--bg);
     background-attachment:fixed;}
   body{position:fixed;inset:0;overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent;background:transparent;}
-  #app{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding-top:max(2px, env(safe-area-inset-top,0px));}
+  #app{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;}
   input,textarea,select{font-size:16px;}  /* verhindert iOS-Zoom beim Fokus */
   body{
     font-family:'Inter',system-ui,sans-serif;
@@ -85,7 +85,7 @@
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.screen.active{animation:none}}
 
-  .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;}
+  .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding-top:max(2px,env(safe-area-inset-top,0px));}
   .head h1{font-size:27px;font-weight:700;letter-spacing:-.03em;}
   .head .sub{color:var(--ink-soft);font-size:13px;}
   .sync-badge{display:inline-block;margin-top:4px;font-size:10.5px;font-weight:700;color:var(--lime);background:rgba(var(--accent-rgb),.12);border:1px solid rgba(var(--accent-rgb),.28);padding:2px 8px;border-radius:20px;}
@@ -615,6 +615,37 @@
   .ws-count{font-size:13px;font-weight:700;flex-shrink:0;}
   .btn.ws-go{margin-top:0;flex:1;}
   .btn.ws-go:disabled{opacity:.4;}
+
+  /* ===== Desktop / iPad — Vollbild mit Seitenleiste ===== */
+  @media (min-width:900px){
+    body{position:static;overflow:visible;}
+    html,body{height:auto;min-height:100%;}
+    #app{max-width:none;min-height:100vh;display:grid;grid-template-columns:232px 1fr;margin:0;}
+    /* linke Spalte reserviert für die Sidebar (nav ist fixed) */
+    .screen{grid-column:2;max-width:1180px;width:100%;margin:0 auto;padding:30px 44px 60px;}
+    .head{padding-top:24px;}
+    .head h1{font-size:34px;}
+    /* Bottom-Nav -> linke Sidebar */
+    nav{position:fixed;top:0;bottom:0;left:0;right:auto;width:232px;border-top:none;border-right:1px solid var(--line);
+        background:rgba(11,15,14,.96);padding:0;display:flex;flex-direction:column;}
+    nav::before{content:"Moodie Foodie";display:block;font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;
+        font-size:17px;letter-spacing:-.02em;color:var(--lime);padding:26px 22px 20px;}
+    .nav-in{flex-direction:column;max-width:none;margin:0;padding:0 14px;gap:4px;}
+    .nav-btn{flex:none;flex-direction:row;justify-content:flex-start;gap:14px;padding:12px 16px;border-radius:12px;}
+    .nav-btn svg{width:21px;height:21px;}
+    .nav-btn span{font-size:14.5px;}
+    .nav-btn.active{background:rgba(var(--accent-rgb),.12);}
+    /* zweispaltige Inhalte auf großen Screens */
+    .cards-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;}
+    /* Modals mittig statt unten angedockt */
+    .modal-bg{align-items:center;}
+    .modal{border-radius:24px;max-width:600px;max-height:86vh;animation:fade .2s ease;}
+    .ws-grid{grid-template-columns:repeat(3,1fr);max-height:52vh;}
+  }
+  @media (min-width:1280px){
+    #app{grid-template-columns:260px 1fr;}
+    nav{width:260px;}
+  }
 </style>
 </head>
 <body>
