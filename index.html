@@ -102,6 +102,14 @@
   .seg button{flex:1;border:none;background:none;padding:9px;border-radius:9px;font-size:13px;font-weight:600;font-family:inherit;color:var(--ink-soft);cursor:pointer;}
   .seg button.on{background:var(--card-2);color:var(--lime);box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.3);}
   /* Kalender */
+  /* Wochen-Navigation */
+  .week-nav{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .wn-arrow{width:40px;height:40px;flex-shrink:0;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-size:22px;font-weight:700;cursor:pointer;display:grid;place-items:center;font-family:inherit;line-height:1;}
+  .wn-arrow:active{background:var(--card-2);}
+  .wn-label{flex:1;text-align:center;line-height:1.15;}
+  .wn-label b{display:block;font-size:15px;font-weight:700;}
+  .wn-label small{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
+  .wn-today{flex-shrink:0;height:40px;padding:0 15px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--lime),var(--lime-deep));color:#0c1210;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
   .dash-strip{display:flex;gap:9px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
   .dash-strip::-webkit-scrollbar{display:none;}
   .dash-card{flex:0 0 auto;min-width:132px;border-radius:15px;padding:12px 14px;cursor:pointer;color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden;}
@@ -253,6 +261,16 @@
   .badge.cheap{background:rgba(var(--accent-rgb),.14);color:var(--lime);}
   .badge.protein{background:rgba(102,192,230,.16);color:var(--sky);}
   .add-card{border:1.5px dashed var(--line);background:none;border-radius:var(--radius);display:grid;place-items:center;min-height:150px;cursor:pointer;color:var(--ink-soft);font-weight:600;gap:6px;}
+  .import-card{border-color:rgba(var(--accent-rgb),.5);color:var(--ink);}
+  .import-card .plus{font-size:26px;}
+  .imp-l{display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin:14px 0 5px;}
+  .imp-in{width:100%;background:var(--card-2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-family:inherit;}
+  .imp-area{width:100%;min-height:150px;background:var(--card-2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-family:inherit;line-height:1.5;resize:vertical;}
+  .imp-fetch{margin-top:10px;}
+  .btn.ghost{background:var(--card-2);color:var(--ink);border:1.5px solid var(--line);}
+  .imp-hint{font-size:12.5px;color:var(--ink-soft);margin:10px 0 2px;line-height:1.5;min-height:4px;}
+  .imp-ai{margin-top:10px;}
+  .imp-ai-note{font-size:11.5px;color:var(--ink-soft);margin:7px 2px 0;line-height:1.45;}
   .prod-head{display:flex;align-items:center;justify-content:space-between;margin:24px 2px 12px;font-size:15px;font-weight:700;}
   .prod-badge{font-size:11px;font-weight:700;color:var(--lime);background:rgba(var(--accent-rgb),.12);border:1px solid rgba(var(--accent-rgb),.28);padding:4px 10px;border-radius:20px;}
   .prod-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:11px;margin-bottom:8px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .12s;}
@@ -289,6 +307,20 @@
   .goal-targets .gt{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px;text-align:center;}
   .goal-targets .gtl{font-size:11px;color:var(--ink-soft);}
   .goal-targets .gtv{font-weight:700;font-size:17px;margin-top:3px;}
+  /* Makro-Ziele */
+  .mg-head{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 10px;}
+  .mg-title{font-size:14.5px;font-weight:700;}
+  .mg-sub{font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
+  .mg-toggle{border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .mg-toggle.on{background:var(--lime);border-color:var(--lime);color:#0c1210;}
+  .mg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:10px;}
+  .mg-grid.mg-auto{opacity:.65;}
+  .mg-cell{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;}
+  .mg-cell label{display:block;font-size:11px;color:var(--ink-soft);margin-bottom:5px;}
+  .mg-cell input{width:100%;background:var(--card-2);border:1.5px solid var(--line);border-radius:9px;padding:9px 4px;color:var(--ink);font-family:inherit;text-align:center;font-weight:700;font-size:16px;}
+  .mg-cell input:disabled{opacity:.8;}
+  .mg-cell small{display:block;font-size:10px;color:var(--ink-soft);margin-top:4px;}
+  .mg-note{font-size:12px;color:var(--ink-soft);margin:2px 2px 16px;line-height:1.45;}
   .who-chip{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;}
   .who-chip.v{background:var(--lime-deep);}
   .who-chip.f{background:var(--sky);}
@@ -502,6 +534,26 @@
   .badge.cat{background:rgba(102,192,230,.16);color:var(--sky);}
   .track-add{width:100%;border:1.5px dashed var(--line);background:none;border-radius:12px;padding:13px;color:var(--ink-soft);font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;margin-top:4px;}
   .track-add:active{background:var(--card-2);}
+  .tm-adj{cursor:pointer;}
+  .tm-adj-ico{opacity:.5;font-size:10px;margin-left:3px;}
+  .adj-pill{display:inline-block;margin-left:7px;font-size:10px;font-weight:700;background:rgba(var(--accent-rgb),.16);color:var(--lime);padding:2px 7px;border-radius:8px;}
+  /* Hinzufügen-Menü im Tracker */
+  .tam-opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:15px;margin-bottom:11px;cursor:pointer;font-family:inherit;color:var(--ink);}
+  .tam-opt:active{background:var(--card-2);}
+  .tam-opt .tam-ico{font-size:26px;flex-shrink:0;}
+  .tam-opt b{display:block;font-size:14.5px;}
+  .tam-opt small{display:block;color:var(--ink-soft);font-size:12px;margin-top:2px;}
+  /* Pro-Tag-Anpassung */
+  .adj-port{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .adj-port input{flex:1;background:var(--card-2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-family:inherit;font-size:16px;text-align:center;font-weight:700;}
+  .adj-step{background:var(--card-2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-weight:700;cursor:pointer;font-family:inherit;}
+  .adj-live{font-family:'Space Grotesk';font-size:13px;color:var(--lime);font-weight:600;margin-bottom:14px;}
+  .adj-or{font-size:12px;color:var(--ink-soft);margin:4px 2px 8px;}
+  .adj-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:16px;}
+  .adj-grid label{display:block;font-size:11px;color:var(--ink-soft);margin-bottom:4px;}
+  .adj-grid input{width:100%;background:var(--card-2);border:1.5px solid var(--line);border-radius:10px;padding:10px 6px;color:var(--ink);font-family:inherit;text-align:center;font-weight:600;}
+  .adj-actions{display:flex;gap:10px;}
+  .adj-actions .btn{flex:1;margin-top:0;}
   .tm-del{width:26px;height:26px;border:none;background:none;color:var(--ink-soft);font-size:18px;cursor:pointer;flex-shrink:0;opacity:.4;}
   .tm-del:active{opacity:1;color:var(--coral);}
   .pick-search-row{display:flex;gap:8px;margin-bottom:12px;}
@@ -861,6 +913,53 @@ const offDB=[
   ['Blaubeeren',57,0.7,14,0.3],['Apfel',52,0.3,14,0.2],['Mandeln',579,21,22,49],['Walnüsse',654,15,14,65],['Erdnussbutter',588,25,20,50],
   ['Olivenöl',884,0,0,100],['Kokosmilch',197,2,3,21],['Passierte Tomaten',35,1.6,6,0.3],['Zwiebel',40,1.1,9,0.1],['Knoblauch',149,6,33,0.5],
   ['Vollkornbrot',247,9,41,3.4],['Haferkleie',246,17,66,7],['Chiasamen',486,17,42,31],['Honig',304,0.3,82,0],['Reiswaffeln',387,8,82,3],
+  // ===== Grundzutaten / Basics (ohne Barcode) =====
+  // Gemüse
+  ['Karotte',41,0.9,10,0.2],['Sellerie',16,0.7,3,0.2],['Lauch',31,1.5,6,0.3],['Frühlingszwiebel',32,1.8,7,0.2],
+  ['Blumenkohl',25,1.9,5,0.3],['Rosenkohl',43,3.4,9,0.3],['Grüne Bohnen',31,1.8,7,0.1],['Erbsen (TK)',81,5,14,0.4],
+  ['Mais (Dose)',86,3.3,19,1.2],['Champignons',22,3.1,3.3,0.3],['Aubergine',25,1,6,0.2],['Kürbis (Hokkaido)',45,1.4,9,0.4],
+  ['Rote Bete',43,1.6,10,0.2],['Rotkohl',31,1.4,7,0.2],['Weißkohl',25,1.3,6,0.1],['Chinakohl',16,1.2,3,0.2],
+  ['Kopfsalat',14,1.4,2.2,0.2],['Feldsalat',21,2,0.8,0.4],['Rucola',25,2.6,3.7,0.7],['Radieschen',16,0.7,3.4,0.1],
+  ['Kohlrabi',27,1.7,6,0.1],['Fenchel',31,1.2,7,0.2],['Mangold',19,1.8,3.7,0.2],['Grünkohl',49,4.3,9,0.9],
+  ['Ingwer',80,1.8,18,0.8],['Chili',40,1.9,9,0.4],['Kräuterseitling',35,3,3,0.4],
+  // Obst
+  ['Birne',57,0.4,15,0.1],['Orange',47,0.9,12,0.1],['Mandarine',53,0.8,13,0.3],['Zitrone',29,1.1,9,0.3],
+  ['Erdbeeren',32,0.7,8,0.3],['Himbeeren',52,1.2,12,0.7],['Weintrauben',69,0.7,18,0.2],['Kiwi',61,1.1,15,0.5],
+  ['Ananas',50,0.5,13,0.1],['Mango',60,0.8,15,0.4],['Pfirsich',39,0.9,10,0.3],['Wassermelone',30,0.6,8,0.2],
+  ['Datteln (getrocknet)',282,2.5,75,0.4],['Rosinen',299,3.1,79,0.5],
+  // Getreide / Mehl / Beilagen
+  ['Reis (roh, weiß)',360,7,80,0.6],['Jasminreis (roh)',356,7,79,0.7],['Couscous (roh)',376,13,77,1],
+  ['Bulgur (roh)',342,12,76,1.3],['Dinkel (roh)',338,15,64,2.4],['Polenta (roh)',353,8,77,1.5],
+  ['Weizenmehl Typ 405',348,10,73,1],['Dinkelmehl',340,12,70,2],['Vollkornmehl',327,12,60,2],
+  ['Haferflocken zart',372,13,59,7],['Cornflakes (ungesüßt)',357,7,84,0.9],['Nudeln (roh)',355,12,71,1.5],
+  ['Gnocchi',160,4,33,0.5],['Kartoffelpüree (Pulver)',355,8,76,2],['Semmelbrösel',350,11,72,2],
+  // Hülsenfrüchte / pflanzl. Protein
+  ['Linsen braun (roh)',336,24,52,1.5],['Schwarze Bohnen (Dose)',91,6,16,0.5],['Weiße Bohnen (Dose)',85,6,15,0.5],
+  ['Erbsen (getrocknet)',341,23,60,1.2],['Sojabohnen (gekocht)',141,12,11,6],['Edamame',121,11,9,5],
+  ['Tempeh',193,19,9,11],['Sojaschnetzel (trocken)',345,52,14,1],['Räuchertofu',176,18,1,11],
+  // Milch / Eier / Käse
+  ['Milch 1,5%',47,3.4,4.8,1.5],['Milch 3,5%',64,3.3,4.7,3.6],['Hafermilch',46,0.8,7,1.5],['Mandelmilch (ungesüßt)',14,0.5,0.3,1.1],
+  ['Naturjoghurt 3,5%',62,3.5,4.7,3.5],['Skyr',63,11,4,0.2],['Hüttenkäse',98,12,3,4],['Frischkäse',253,6,4,24],
+  ['Schmand',240,2.8,3.5,24],['Saure Sahne',115,3,3.5,10],['Sahne 30%',292,2.4,3.3,30],['Crème fraîche',292,2.4,3,30],
+  ['Butter',717,0.7,0.7,81],['Gouda',356,25,0,28],['Emmentaler',380,28,0,30],['Parmesan',402,36,0,27],['Mozzarella',254,18,1,19],
+  ['Harzer Käse',124,30,0,0.7],['Ei (ganz)',155,13,1.1,11],['Eiweiß',52,11,0.7,0.2],
+  // Fleisch / Fisch
+  ['Schweineschnitzel',143,22,0,6],['Rinderfilet',126,21,0,4.5],['Hähnchenschenkel',177,19,0,11],['Hackfleisch gemischt',250,17,0,20],
+  ['Lachs (TK)',208,20,0,13],['Kabeljau',82,18,0,0.7],['Forelle',119,18,0,5],['Thunfisch (frisch)',144,23,0,5],
+  ['Kochschinken',107,18,1,3.5],['Putenaufschnitt',105,20,1,2],['Bacon',541,37,1.4,42],['Salami',378,20,1,32],
+  // Fette / Öle / Nüsse / Saaten
+  ['Rapsöl',884,0,0,100],['Sonnenblumenöl',884,0,0,100],['Kokosöl',862,0,0,100],['Margarine',720,0.2,0.7,80],
+  ['Cashewkerne',553,18,30,44],['Haselnüsse',628,15,17,61],['Sonnenblumenkerne',584,21,20,51],['Kürbiskerne',559,30,11,49],
+  ['Leinsamen',534,18,29,42],['Sesam',573,18,23,50],['Tahini',595,17,21,54],
+  // Vorrat / Würzen / Süßes
+  ['Tomatenmark',82,4.3,14,0.5],['Kokosmilch (Dose)',230,2.3,6,24],['Gemüsebrühe (fertig)',4,0.2,0.5,0.1],['Sojasauce',53,8,5,0],
+  ['Senf',101,6,6,6],['Ketchup',112,1.2,26,0.1],['Mayonnaise',680,1,2,73],['Zucker',400,0,100,0],['Brauner Zucker',380,0,98,0],
+  ['Ahornsirup',260,0,67,0],['Agavendicksaft',310,0,76,0],['Nuss-Nougat-Creme',539,6,57,31],['Marmelade',250,0.4,60,0.1],
+  ['Backpulver',87,0,22,0],['Kakaopulver (entölt)',343,20,14,11],['Vanillezucker',394,0,99,0],['Speisestärke',381,0.3,94,0.1],
+  ['Hefe (frisch)',105,12,12,2],['Kokosraspeln',660,6,23,65],['Trockenhefe',325,40,37,8],
+  // Kräuter / Gewürze (meist kleine Mengen)
+  ['Petersilie',36,3,6,0.8],['Basilikum',23,3.2,2.7,0.6],['Dill',43,3.5,7,1.1],['Schnittlauch',30,3.3,4,0.7],
+  ['Salz',0,0,0,0],['Pfeffer',251,10,64,3],['Paprikapulver',282,14,54,13],['Curry',325,13,56,14],['Zimt',247,4,81,1.2],
 ];
 // Makros einer Zutat pro 100g aus dem Namen nachschlagen (Fallback: nur kcal aus der Zeile)
 function ingMacros(name, kcalFallback){
@@ -931,24 +1030,76 @@ const users=[
 ];
 let au=0;                       // aktiver Nutzer
 let days, cookSessions, calCook;
+// ===== Mehr-Wochen-Kalender: jede Woche datumsbasiert gespeichert =====
+const DAYNAMES=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+let weekKey;                     // Montag der aktuell ANGEZEIGTEN Woche, "YYYY-MM-DD"
+function mondayOf(date){ const n=new Date(date); n.setHours(0,0,0,0); const dow=(n.getDay()+6)%7; n.setDate(n.getDate()-dow); return n; }
+function keyOf(date){ const d=mondayOf(date); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function dateFromKey(k){ const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
+function todayKey(){ return keyOf(new Date()); }
+function freshWeek(){ return { days: DAYNAMES.map(n=>({n, act:'work', burn:0, meals:[]})), cook:[] }; }
+// Einmalige Migration: alten festen Plan (u.days/u.cook) der LAUFENDEN Woche zuordnen
+function migrateWeeks(u){
+  if(u.weeks) return;
+  u.weeks={};
+  u.weeks[todayKey()] = { days: u.days.map(d=>({n:d.n, act:d.act||'work', burn:d.burn||0, meals:(d.meals||[]).map(e=>({...e}))})), cook:(u.cook||[]).map(c=>({...c})) };
+}
+users.forEach(migrateWeeks);
+// Woche eines Nutzers holen (legt leere an, falls nötig)
+function weekOf(u,k){ if(!u.weeks) migrateWeeks(u); if(!u.weeks[k]) u.weeks[k]=freshWeek(); return u.weeks[k]; }
 const U=()=>users[au];
 const target = d => U().base + ADD[d.act] + (d.burn||0);
 const planned = d => d.meals.reduce((s,e)=>s+mealById(e.id).kcal,0);
 
 function loadUser(i){
   au=i;
-  days=users[i].days;
-  cookSessions=users[i].cook;
-  // Aktuelle Woche: Montag dieser Woche berechnen, echte Daten + heutigen Tag markieren
-  const now=new Date(); const dow=(now.getDay()+6)%7; // 0=Mo .. 6=So
-  const monday=new Date(now); monday.setHours(0,0,0,0); monday.setDate(now.getDate()-dow);
+  migrateWeeks(users[i]);
+  if(!weekKey) weekKey=todayKey();          // beim Start: laufende Woche
+  loadWeek(weekKey);
+}
+// Lädt die Woche <k> des aktiven Nutzers in die Live-Globals days/cookSessions
+function loadWeek(k){
+  weekKey=k;
+  const u=users[au]; const wk=weekOf(u,k);
+  days=wk.days;
+  cookSessions=wk.cook;
+  // echte Kalenderdaten pro Tag berechnen + heutigen Tag markieren (nur in laufender Woche)
+  const monday=dateFromKey(k); const tk=todayKey();
+  const isThisWeek=(k===tk);
+  const todayDow=(new Date().getDay()+6)%7;
   days.forEach((d,idx)=>{ const dt=new Date(monday); dt.setDate(monday.getDate()+idx);
-    d.d=dt.getDate()+'.'+(dt.getMonth()+1)+'.'; d.today=(idx===dow); });
+    d.n=DAYNAMES[idx];
+    d.d=dt.getDate()+'.'+(dt.getMonth()+1)+'.';
+    d.date=dt;
+    d.today=(isThisWeek && idx===todayDow); });
   calCook={}; cookSessions.forEach(s=>calCook[s.day]={id:s.id,portions:s.portions});
   autoPlanPrep();
   days.forEach(d=>d.meals.forEach(e=>{ const m=mealById(e.id); if(!m)return;
-    m.usedAs=m.usedAs||{}; const k=['Frühstück','Mittagessen','Abendessen'].includes(e.l)?e.l:'Sonstiges';
-    if(!m.usedAs[k]) m.usedAs[k]=1; if(!m.useCount) m.useCount=1; }));
+    m.usedAs=m.usedAs||{}; const kk=['Frühstück','Mittagessen','Abendessen'].includes(e.l)?e.l:'Sonstiges';
+    if(!m.usedAs[kk]) m.usedAs[kk]=1; if(!m.useCount) m.useCount=1; }));
+}
+// Wochen-Navigation: delta=+1/-1 Wochen, oder 'today'
+function setWeek(delta){
+  let k;
+  if(delta==='today') k=todayKey();
+  else { const d=dateFromKey(weekKey); d.setDate(d.getDate()+delta*7); k=keyOf(d); }
+  loadWeek(k);
+  renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderTrack(); renderCook(); renderShop(); updateWeekLabel(); saveState();
+}
+// Beschriftung „KW / Zeitraum" aktualisieren
+function weekLabelText(){
+  const mon=dateFromKey(weekKey); const sun=new Date(mon); sun.setDate(mon.getDate()+6);
+  const f=d=>d.getDate()+'.'+(d.getMonth()+1)+'.';
+  const tk=todayKey();
+  const diff=Math.round((dateFromKey(weekKey)-dateFromKey(tk))/(7*86400000));
+  const rel = diff===0?'Diese Woche':diff===1?'Nächste Woche':diff===-1?'Letzte Woche':(diff>0?`in ${diff} Wochen`:`vor ${-diff} Wochen`);
+  return {range:`${f(mon)}–${f(sun)}`, rel, isToday:diff===0};
+}
+function updateWeekLabel(){
+  const el=document.getElementById('weekNavLabel'); if(!el) return;
+  const L=weekLabelText();
+  el.innerHTML=`<b>${L.range}</b><small>${L.rel}</small>`;
+  const tb=document.getElementById('weekToday'); if(tb) tb.style.display=L.isToday?'none':'';
 }
 
 // AUTO: verteilt jede gekochte Portion auf Folgetage als Mahlzeit
@@ -1102,26 +1253,55 @@ function renderCalendar(){
   const cal=document.getElementById('calendar');
   const H=(TT_END-TT_START)*TT_HP;
   const todayIdx=days.findIndex(d=>d.today);
+  const L=weekLabelText();
 
-  // Dashboard-Leiste
-  const td=days[todayIdx];
-  const nextCook=cookSessions.slice().sort((a,b)=>a.day-b.day).find(s=>s.day>=todayIdx)||cookSessions[0];
-  const shopDays=Object.keys(calShop).map(Number).sort((a,b)=>a-b);
-  const nextShopDay=shopDays.find(x=>x>=todayIdx)??shopDays[0];
-  const dash=`<div class="dash-strip">
-    <div class="dash-card today" data-go="track"><div class="gl"></div>
-      <div class="dl">Heute · ${actLabel[td.act]}</div>
-      <div class="dv">${planned(td)}<span> / ${target(td)} kcal</span></div>
-      <div class="dsub">${td.meals.length} Mahlzeiten geplant</div></div>
-    <div class="dash-card cook" data-go="cook">
-      <div class="dl">🍳 Nächstes Kochen</div>
-      <div class="dv">${days[nextCook.day].n.slice(0,2)} ${fmt(cookTime[nextCook.day]??18*60)}</div>
-      <div class="dsub">${mealById(nextCook.id).name} · ${nextCook.portions} Port.</div></div>
-    <div class="dash-card shop" data-go="shop">
-      <div class="dl">🛒 Nächster Einkauf</div>
-      <div class="dv">${days[nextShopDay].n.slice(0,2)} ${fmt(shopTime[nextShopDay])}</div>
-      <div class="dsub">${calShop[nextShopDay].items.split(',').length} Artikel · Lidl</div></div>
+  // Wochen-Navigation (immer sichtbar)
+  const nav=`<div class="week-nav">
+    <button class="wn-arrow" id="wnPrev" aria-label="Woche zurück">‹</button>
+    <div class="wn-label" id="weekNavLabel"><b>${L.range}</b><small>${L.rel}</small></div>
+    <button class="wn-arrow" id="wnNext" aria-label="Woche vor">›</button>
+    <button class="wn-today" id="weekToday" style="${L.isToday?'display:none':''}">Heute</button>
   </div>`;
+
+  // Dashboard-Leiste — in der laufenden Woche „Heute", sonst Wochenübersicht
+  const totalMeals=days.reduce((s,d)=>s+d.meals.length,0);
+  let dash;
+  if(todayIdx>=0){
+    const td=days[todayIdx];
+    const nextCook=cookSessions.slice().sort((a,b)=>a.day-b.day).find(s=>s.day>=todayIdx)||cookSessions[0];
+    const shopDays=Object.keys(calShop).map(Number).sort((a,b)=>a-b);
+    const nextShopDay=shopDays.find(x=>x>=todayIdx)??shopDays[0];
+    dash=`<div class="dash-strip">
+      <div class="dash-card today" data-go="track"><div class="gl"></div>
+        <div class="dl">Heute · ${actLabel[td.act]}</div>
+        <div class="dv">${planned(td)}<span> / ${target(td)} kcal</span></div>
+        <div class="dsub">${td.meals.length} Mahlzeiten geplant</div></div>
+      ${nextCook?`<div class="dash-card cook" data-go="cook">
+        <div class="dl">🍳 Nächstes Kochen</div>
+        <div class="dv">${days[nextCook.day].n.slice(0,2)} ${fmt(cookTime[nextCook.day]??18*60)}</div>
+        <div class="dsub">${mealById(nextCook.id).name} · ${nextCook.portions} Port.</div></div>`:''}
+      ${(nextShopDay!=null&&calShop[nextShopDay])?`<div class="dash-card shop" data-go="shop">
+        <div class="dl">🛒 Nächster Einkauf</div>
+        <div class="dv">${days[nextShopDay].n.slice(0,2)} ${fmt(shopTime[nextShopDay])}</div>
+        <div class="dsub">${calShop[nextShopDay].items.split(',').length} Artikel · Lidl</div></div>`:''}
+    </div>`;
+  } else {
+    dash=`<div class="dash-strip">
+      <div class="dash-card" data-go="track"><div class="gl"></div>
+        <div class="dl">${L.rel}</div>
+        <div class="dv">${totalMeals}<span> Mahlzeiten geplant</span></div>
+        <div class="dsub">${L.range}</div></div>
+      ${cookSessions.length?`<div class="dash-card cook" data-go="cook">
+        <div class="dl">🍳 Kochen diese Woche</div>
+        <div class="dv">${cookSessions.length}×</div>
+        <div class="dsub">${cookSessions.map(s=>mealById(s.id)?mealById(s.id).name:'').filter(Boolean).slice(0,2).join(', ')||'geplant'}</div></div>`:''}
+      <div class="dash-card" data-go="plan" style="opacity:.85">
+        <div class="dl">🗓️ Planung</div>
+        <div class="dv">Woche</div>
+        <div class="dsub">frei planbar</div></div>
+    </div>`;
+  }
+  const dashNav=nav+dash;
 
   // Stunden- + Halbstundenlinien, Achse
   let hours='',gutterLabels='';
@@ -1169,7 +1349,7 @@ function renderCalendar(){
   const prevSc=cal.querySelector('.tt-scroll');
   const keepTop=prevSc?prevSc.scrollTop:null, keepLeft=prevSc?prevSc.scrollLeft:null;
 
-  cal.innerHTML=dash +
+  cal.innerHTML=dashNav +
     `<div class="tt-hint">Block ziehen verschiebt die Zeit · unten am Griff ziehen ändert die Dauer · kurzes Tippen öffnet Rezept/Kochen/Einkauf.</div>
     <div class="tt-scroll"><div class="tt-inner">
       <div class="tt-gutter"><div class="tt-head"></div><div class="tt-body" style="height:${H}px">${gutterLabels}</div></div>
@@ -1177,7 +1357,9 @@ function renderCalendar(){
     </div></div>`;
 
   const evMap={}; cols.forEach(c=>{evMap[c.i]=c.evs;});
-  cal.querySelectorAll('.dash-card').forEach(c=>c.onclick=()=>switchTab(c.dataset.go));
+  cal.querySelectorAll('.dash-card[data-go]').forEach(c=>c.onclick=()=>switchTab(c.dataset.go));
+  { const pv=cal.querySelector('#wnPrev'), nx=cal.querySelector('#wnNext'), td=cal.querySelector('#weekToday');
+    if(pv) pv.onclick=()=>setWeek(-1); if(nx) nx.onclick=()=>setWeek(1); if(td) td.onclick=()=>setWeek('today'); }
   cal.querySelectorAll('.ev-clock').forEach(el=>{
     el.addEventListener('pointerdown',e=>e.stopPropagation()); // nicht als Drag werten
     el.onclick=(e)=>{e.stopPropagation();openTimeEdit(evMap[+el.dataset.day][+el.dataset.ei]);};
@@ -1329,7 +1511,8 @@ function openPicker(di, opt){
     </div>`;}).join('')||'<div style="color:var(--ink-soft);font-size:13px;padding:12px 2px">Kein Treffer.</div>';
     list.querySelectorAll('.pick').forEach(p=>{
       p.onclick=()=>{ const id=+p.dataset.id;
-        if(isAdd){ days[di].meals.push({l:pickLabel, id, t:labelTime[pickLabel]??15*60}); markUsed(id,pickLabel); }
+        const tgt = opt.targetMeals || days[di].meals;
+        if(isAdd){ tgt.push({l:pickLabel, id, t:labelTime[pickLabel]??15*60}); markUsed(id,pickLabel); }
         else { const e=days[di].meals[opt.idx]; e.id=id; markUsed(id,e.l); }
         closeModal(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderTrack(); saveState();
         toast(isAdd?pickLabel+' hinzugefügt':'Ersetzt');
@@ -1351,7 +1534,8 @@ function openPicker(di, opt){
       meals.push({id, name:p.name, emoji:p.emoji||'🏷️', g:'linear-gradient(135deg,#2e2748,#1f1834)',
         kcal:p.kcal||0, p:p.p||0, c:p.c||0, f:p.f||0, ings:[[p.name,100,(p.kcal||0)+' kcal/100g']]});
       addUserProduct(p);
-      if(isAdd){ days[di].meals.push({l:pickLabel, id, t:labelTime[pickLabel]??15*60}); markUsed(id,pickLabel); }
+      const tgt = opt.targetMeals || days[di].meals;
+      if(isAdd){ tgt.push({l:pickLabel, id, t:labelTime[pickLabel]??15*60}); markUsed(id,pickLabel); }
       else { const e=days[di].meals[opt.idx]; e.id=id; markUsed(id,e.l); }
       closeModal(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderLib(); renderTrack(); saveState();
       toast(p.name+' gescannt & eingeplant'); if(opt.onDone) opt.onDone();
@@ -1410,9 +1594,11 @@ function renderLibGrid(){
         </div>
       </div>
     </div>`;}).join('') +
+    `<button class="add-card import-card" id="importMeal"><div class="plus">📥</div>Aus Video/Link</button>`+
     `<button class="add-card" id="addMeal"><div class="plus">+</div>Neue Mahlzeit</button>`;
   g.querySelectorAll('.meal-card').forEach(c=>c.onclick=()=>openEditor(+c.dataset.id));
   document.getElementById('addMeal').onclick=()=>openEditor(null);
+  document.getElementById('importMeal').onclick=()=>openImport();
 }
 
 // Produkt bearbeiten / löschen / in Mahlzeit übernehmen
@@ -1694,8 +1880,135 @@ function openScanner(onFound, onBack){
   draw();
 }
 let nextMealId = 100;
-function openEditor(id){
-  const m = id?mealById(id):{id:null,name:'',emoji:'🍽️',g:'linear-gradient(135deg,#2e2748,#1f1834)',ings:[],_new:true};
+// ========== Rezept-Import aus Video / Link ==========
+// Erkennt Zutaten-Zeilen (Menge + Einheit + Name) und Schritte aus eingefügtem Text.
+const IMPORT_UNITS = ['g','kg','ml','l','el','tl','prise','prisen','dose','dosen','packung','packungen','pck','stück','stk','zehe','zehen','bund','scheibe','scheiben','tasse','tassen','handvoll','cup','cups','tbsp','tsp','oz','lb'];
+function parseRecipeText(raw){
+  const text=(raw||'').replace(/\r/g,'').trim();
+  const lines=text.split('\n').map(l=>l.trim()).filter(Boolean);
+  const ings=[]; const stepLines=[];
+  // Menge am Zeilenanfang? -> Zutat. Zahl + (optional Einheit) + Name.
+  const qtyRe=/^[-•*·▪️•\s]*(\d+[.,]?\d*)\s*([a-zäöüA-ZÄÖÜ]+)?\.?\s+(.{2,})$/;
+  // „Zutaten:" / „Zubereitung:" Abschnitte erkennen
+  let mode='auto';
+  for(let ln of lines){
+    const low=ln.toLowerCase();
+    if(/^(zutaten|ingredients|du brauchst|einkaufsliste)[:：]?$/.test(low)){ mode='ing'; continue; }
+    if(/^(zubereitung|anleitung|so geht|steps|method|rezept|and so|zubereiten)[:：]?/.test(low)){ mode='step'; continue; }
+    // Hashtags / reine Links / Social-Floskeln raus
+    if(/^#|^https?:\/\/|folgt mir|abonnier|link in bio|@[a-z0-9_.]+$/i.test(low)) continue;
+    const m=ln.match(qtyRe);
+    const unit=m && m[2] ? m[2].toLowerCase().replace(/\.$/,'') : null;
+    const looksIng = m && (IMPORT_UNITS.includes(unit) || (!m[2]) ) && ln.length<60;
+    if(mode==='ing'){
+      if(m){ const amt=parseFloat(m[1].replace(',','.')); const nm=(m[3]||'').replace(/[.,;]+$/,'').trim();
+             ings.push({name:nm||ln, amt:isFinite(amt)?amt:100}); }
+      else if(ln.length<50){ ings.push({name:ln.replace(/^[-•*·▪️•\s]+/,''), amt:100}); }
+    } else if(mode==='step'){
+      stepLines.push(ln.replace(/^\d+[.)]\s*/,''));
+    } else { // auto
+      if(looksIng){ const amt=parseFloat(m[1].replace(',','.')); const nm=(m[3]||'').replace(/[.,;]+$/,'').trim();
+                    ings.push({name:nm||ln, amt:isFinite(amt)?amt:100}); }
+      else if(ln.length>40 || /^\d+[.)]/.test(ln)){ stepLines.push(ln.replace(/^\d+[.)]\s*/,'')); }
+    }
+  }
+  // Titel: erste sinnvolle Zeile ohne Menge/Hashtag
+  let title='';
+  for(let ln of lines){ const low=ln.toLowerCase();
+    if(/^#|^https?:\/\//.test(ln)) continue;
+    if(qtyRe.test(ln)) continue;
+    if(/^(zutaten|zubereitung|ingredients|anleitung)/.test(low)) continue;
+    title=ln.replace(/[#*_]+/g,'').replace(/^[-•*·\s]+/,'').slice(0,60).trim(); break;
+  }
+  return {title, ings, steps:stepLines.join('\n')};
+}
+// Holt Titel/Beschreibung über offene oEmbed-Endpunkte (klappt bei YouTube zuverlässig).
+async function fetchLinkMeta(url){
+  url=url.trim();
+  try{
+    if(/youtube\.com|youtu\.be/.test(url)){
+      const r=await fetch('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent(url));
+      if(r.ok){const j=await r.json(); return {title:j.title||'', author:j.author_name||'', ok:true};}
+    }
+    if(/tiktok\.com/.test(url)){
+      const r=await fetch('https://www.tiktok.com/oembed?url='+encodeURIComponent(url));
+      if(r.ok){const j=await r.json(); return {title:j.title||'', author:j.author_name||'', ok:true};}
+    }
+  }catch(e){}
+  return {ok:false};
+}
+function openImport(prefillUrl){
+  const mod=document.getElementById('modal');
+  mod.innerHTML=`<div class="grab"></div>
+    <h2>📥 Rezept aus Video / Link</h2>
+    <div class="mh-sub">Link von TikTok/YouTube einfügen — oder die Beschreibung/den Rezept-Kommentar direkt hineinkopieren. Daraus bauen wir einen Entwurf, den du anpasst.</div>
+    <label class="imp-l">Video-Link (optional)</label>
+    <input id="impUrl" class="imp-in" placeholder="https://… (TikTok / YouTube)" value="${prefillUrl?prefillUrl.replace(/"/g,'&quot;'):''}">
+    <button class="btn ghost imp-fetch" id="impFetch">🔎 Titel vom Link holen</button>
+    <button class="btn lime imp-ai" id="impAI">✨ KI: Video auslesen (Audio → Rezept)</button>
+    <div class="imp-ai-note">Lässt das Video von der KI anhören und baut daraus das Rezept. Funktioniert am besten bei YouTube; bei TikTok klappt der Download nicht immer — dann Beschreibung einfügen.</div>
+    <label class="imp-l">Beschreibung / Rezept-Text</label>
+    <textarea id="impText" class="imp-area" placeholder="Hier die Caption oder den fixierten Kommentar mit Zutaten & Schritten einfügen…&#10;&#10;Beispiel:&#10;Protein-Pasta&#10;Zutaten:&#10;100 g Pasta&#10;150 g Hähnchen&#10;1 EL Olivenöl&#10;Zubereitung:&#10;Pasta kochen, Hähnchen anbraten…"></textarea>
+    <div class="imp-hint" id="impHint"></div>
+    <button class="btn lime" id="impGo">Rezept-Entwurf erstellen</button>`;
+  openModal();
+  const urlEl=mod.querySelector('#impUrl'), txtEl=mod.querySelector('#impText'), hint=mod.querySelector('#impHint');
+  mod.querySelector('#impFetch').onclick=async()=>{
+    const u=urlEl.value.trim(); if(!u){toast('Erst einen Link einfügen');return;}
+    hint.textContent='Hole Infos…';
+    const meta=await fetchLinkMeta(u);
+    if(meta.ok){
+      if(!txtEl.value.trim()) txtEl.value=meta.title+'\n';
+      else txtEl.value=meta.title+'\n'+txtEl.value;
+      hint.innerHTML='✅ Titel übernommen: <b>'+ (meta.title||'—') +'</b><br>Füge jetzt noch Zutaten & Schritte aus der Beschreibung ein.';
+    } else {
+      hint.innerHTML='⚠️ Konnte vom Link nichts automatisch lesen (die Plattform blockiert das oft). Kopiere die <b>Beschreibung / den Rezept-Kommentar</b> ins Textfeld — das klappt immer.';
+    }
+  };
+  const aiBtn=mod.querySelector('#impAI');
+  if(aiBtn) aiBtn.onclick=async()=>{
+    const u=urlEl.value.trim();
+    if(!u){ toast('Erst einen Link einfügen'); return; }
+    if(typeof SUPABASE_URL==='undefined' || !SUPABASE_URL.startsWith('http')){
+      hint.textContent='KI-Funktion nur in der installierten App (mit Supabase) verfügbar.'; return; }
+    aiBtn.disabled=true; const old=aiBtn.textContent; aiBtn.textContent='⏳ KI hört zu…';
+    hint.textContent='Video wird geholt und ausgewertet — das kann 10–40 Sek dauern.';
+    try{
+      const r=await fetch(SUPABASE_URL+'/functions/v1/rezept-import',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON,'apikey':SUPABASE_ANON},
+        body:JSON.stringify({url:u, text:txtEl.value.trim()||undefined})
+      });
+      const j=await r.json();
+      if(!r.ok || j.error) throw new Error(j.error||('Fehler '+r.status));
+      const ings=(j.ingredients||[]).map(it=>{
+        const nm=(it.name||'').trim(); const mac=ingMacros(nm);
+        return [nm, (typeof it.amount==='number'&&isFinite(it.amount))?it.amount:100, (mac.kcal||0)+' kcal/100g'];
+      });
+      const steps=(Array.isArray(j.steps)?j.steps.join('\n'):(j.steps||''))+'\n\nQuelle: '+u;
+      closeModal();
+      openEditor(null, {name:(j.title||'Importiertes Rezept').trim(), ings, steps:steps.trim()});
+      toast(j._hadAudio?'🎧 Aus Video erstellt — bitte prüfen':'Aus Beschreibung erstellt — bitte prüfen');
+    }catch(e){
+      aiBtn.disabled=false; aiBtn.textContent=old;
+      hint.innerHTML='⚠️ '+ (e.message||e) + '<br>Tipp: Beschreibung/Kommentar unten einfügen und „Rezept-Entwurf erstellen".';
+    }
+  };
+  mod.querySelector('#impGo').onclick=()=>{
+    const parsed=parseRecipeText(txtEl.value);
+    if(!parsed.title && !parsed.ings.length && !parsed.steps){ toast('Bitte erst Text einfügen oder Link holen'); return; }
+    const seedIngs=(parsed.ings.length?parsed.ings:[]).map(x=>{const mac=ingMacros(x.name); return [x.name, x.amt, (mac.kcal||0)+' kcal/100g'];});
+    const src=urlEl.value.trim();
+    const steps=(parsed.steps||'') + (src?('\n\nQuelle: '+src):'');
+    closeModal();
+    openEditor(null, {name:parsed.title||'Importiertes Rezept', ings:seedIngs, steps:steps.trim()});
+    toast('Entwurf erstellt — bitte Mengen & Makros prüfen');
+  };
+  // Direkt losparsen, wenn per Share-Link mit Text gekommen
+  if(prefillUrl){ setTimeout(()=>mod.querySelector('#impFetch').click(), 60); }
+}
+function openEditor(id,seed,onSaved){
+  const m = id?mealById(id):{id:null,name:(seed&&seed.name)||'',emoji:(seed&&seed.emoji)||'🍽️',g:'linear-gradient(135deg,#2e2748,#1f1834)',ings:(seed&&seed.ings)||[],steps:(seed&&seed.steps)||'',_new:true};
   // Arbeits-Zustand
   let name = m.name;
   let photo = m.photo||null;                 // base64-Bild, falls hochgeladen
@@ -1903,15 +2216,109 @@ function openEditor(id){
       if(m._new) meals.push(target);
       closeModal(); renderLib(); saveState();
       toast(m._new?'Gericht angelegt':'Gericht aktualisiert');
+      if(typeof onSaved==='function') onSaved(target.id);
     };
   }
   draw(); openModal();
 }
 
 // ---------- Tracker ----------
+// Hinzufügen-Menü: aus Library wählen ODER direkt neu erstellen
+function openTrackAddMenu(dIdx){
+  const mod=document.getElementById('modal');
+  mod.innerHTML=`<div class="grab"></div>
+    <h2>Mahlzeit hinzufügen</h2>
+    <div class="mh-sub">Aus deiner Sammlung wählen, scannen — oder direkt ein neues Gericht erstellen.</div>
+    <button class="tam-opt" id="tamLib"><span class="tam-ico">📚</span><div><b>Aus deiner Library</b><small>vorhandenes Gericht wählen oder scannen</small></div></button>
+    <button class="tam-opt" id="tamNew"><span class="tam-ico">✨</span><div><b>Neue Mahlzeit erstellen</b><small>Zutaten eingeben — wird danach direkt für heute getrackt</small></div></button>
+    <button class="tam-opt" id="tamImport"><span class="tam-ico">📥</span><div><b>Aus Video / Link</b><small>TikTok/YouTube oder Beschreibung</small></div></button>`;
+  openModal();
+  const todayMealsArr=todayRef().meals;
+  mod.querySelector('#tamLib').onclick=()=>{ closeModal(); openPicker(0,{mode:'add',onDone:renderTrack,targetMeals:todayMealsArr}); };
+  mod.querySelector('#tamImport').onclick=()=>{ closeModal(); openImport(); };
+  mod.querySelector('#tamNew').onclick=()=>{ closeModal();
+    openEditor(null, null, (newId)=>{
+      // neu erstelltes Gericht direkt in den heutigen Plan aufnehmen
+      todayRef().meals.push({l:'Snack', id:newId, t:labelTime['Snack']??15*60});
+      markUsed(newId,'Snack');
+      renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); renderTrack(); saveState();
+      toast('Erstellt & für heute getrackt');
+    });
+  };
+}
+// Pro-Eintrag anpassen: Portionsgewicht (bei gekochtem) ODER Makros — ohne das Rezept zu ändern
+function openTrackAdjust(dIdx, i){
+  const entry=todayRef().meals[i]; if(!entry) return;
+  const m=mealById(entry.id); if(!m) return;
+  const cooked=!!m.cooked;
+  const cur=entryMacros(entry);
+  let g = entry.g || (cooked?(m.cooked.portionG||150):100);
+  let ov = entry.ovr ? {...entry.ovr} : {kcal:cur.kcal, p:cur.p, c:cur.c, f:cur.f};
+  let useOvr = !!entry.ovr;
+  const mod=document.getElementById('modal');
+  // Makros, die ein Portionsgewicht ergibt (bei gekochtem)
+  function fromPortion(gr){ if(!cooked) return ov; const r=gr/100, q=m.cooked.per100;
+    return {kcal:Math.round(q.kcal*r), p:Math.round(q.p*r), c:Math.round(q.c*r), f:Math.round(q.f*r)}; }
+  function draw(){
+    const shown = useOvr ? ov : fromPortion(g);
+    mod.innerHTML=`<div class="grab"></div>
+      <h2>${m.emoji||'🍽️'} ${m.name}</h2>
+      <div class="mh-sub">Nur für diesen Tag — dein Rezept bleibt unverändert.</div>
+      ${cooked?`
+      <div class="cooked-note" style="margin-bottom:14px">🍲 Gekocht ${cookedDateStr(m.cooked.date)} · ${m.cooked.per100.kcal} kcal/100 g</div>
+      <label class="imp-l">Portionsgewicht für diesen Tag (g)</label>
+      <div class="adj-port">
+        <button class="adj-step" data-d="-25">−25</button>
+        <input id="adjG" inputmode="numeric" value="${g}">
+        <button class="adj-step" data-d="25">+25</button>
+      </div>
+      <div class="adj-live" id="adjLive">${shown.kcal} kcal · ${shown.p}P / ${shown.c}C / ${shown.f}F</div>
+      <div class="adj-or">oder Werte direkt setzen:</div>`:''}
+      <div class="adj-grid">
+        <div><label>kcal</label><input id="aK" inputmode="numeric" value="${shown.kcal}"></div>
+        <div><label>Protein</label><input id="aP" inputmode="numeric" value="${shown.p}"></div>
+        <div><label>Carbs</label><input id="aC" inputmode="numeric" value="${shown.c}"></div>
+        <div><label>Fett</label><input id="aF" inputmode="numeric" value="${shown.f}"></div>
+      </div>
+      <div class="adj-actions">
+        ${(entry.ovr||entry.g)?`<button class="btn ghost" id="adjReset">Zurücksetzen</button>`:''}
+        <button class="btn lime" id="adjSave">Für heute übernehmen</button>
+      </div>`;
+    // Portionsgewicht
+    const gi=mod.querySelector('#adjG');
+    const syncFromPortion=()=>{ useOvr=false; const s=fromPortion(g);
+      const L=mod.querySelector('#adjLive'); if(L) L.textContent=`${s.kcal} kcal · ${s.p}P / ${s.c}C / ${s.f}F`;
+      mod.querySelector('#aK').value=s.kcal; mod.querySelector('#aP').value=s.p;
+      mod.querySelector('#aC').value=s.c; mod.querySelector('#aF').value=s.f; };
+    if(gi){ gi.oninput=()=>{ g=parseFloat(gi.value)||0; syncFromPortion(); };
+      mod.querySelectorAll('.adj-step').forEach(b=>b.onclick=()=>{ g=Math.max(0,g+(+b.dataset.d)); gi.value=g; syncFromPortion(); }); }
+    // Makro-Felder manuell → override an
+    ['aK','aP','aC','aF'].forEach((id,k)=>{ mod.querySelector('#'+id).oninput=()=>{ useOvr=true;
+      ov={kcal:parseInt(mod.querySelector('#aK').value)||0, p:parseInt(mod.querySelector('#aP').value)||0,
+          c:parseInt(mod.querySelector('#aC').value)||0, f:parseInt(mod.querySelector('#aF').value)||0}; }; });
+    const rb=mod.querySelector('#adjReset'); if(rb) rb.onclick=()=>{ delete entry.ovr; delete entry.g; closeModal(); renderTrack(); renderWeek(); saveState(); toast('Zurückgesetzt'); };
+    mod.querySelector('#adjSave').onclick=()=>{
+      if(useOvr){ ov={kcal:parseInt(mod.querySelector('#aK').value)||0, p:parseInt(mod.querySelector('#aP').value)||0,
+                      c:parseInt(mod.querySelector('#aC').value)||0, f:parseInt(mod.querySelector('#aF').value)||0};
+        entry.ovr=ov; delete entry.g; }
+      else if(cooked){ entry.g=g; delete entry.ovr; }
+      closeModal(); renderTrack(); renderWeek(); saveState(); toast('Für heute übernommen');
+    };
+  }
+  draw(); openModal();
+}
 // Tracker nutzt den Heute-Plan des aktiven Nutzers (e.done pro Mahlzeit)
-function todayMeals(){const i=days.findIndex(d=>d.today);return days[i<0?0:i].meals;}
-function todayDay(){const i=days.findIndex(d=>d.today);return days[i<0?0:i];}
+// Tracker zeigt IMMER den echten heutigen Tag — unabhängig von der im Kalender gewählten Woche
+function todayRef(){
+  const u=users[au]; const wk=weekOf(u, todayKey());
+  const dow=(new Date().getDay()+6)%7;
+  const d=wk.days[dow];
+  if(!d.date){ const mon=dateFromKey(todayKey()); const dt=new Date(mon); dt.setDate(mon.getDate()+dow);
+    d.n=DAYNAMES[dow]; d.d=dt.getDate()+'.'+(dt.getMonth()+1)+'.'; d.date=dt; d.today=true; }
+  return d;
+}
+function todayMeals(){ return todayRef().meals; }
+function todayDay(){ return todayRef(); }
 function renderTrack(){
   const tm=todayMeals();
   // Kopf mit Nutzer + Ziel-Bearbeitung
@@ -1921,19 +2328,20 @@ function renderTrack(){
   document.getElementById('goalEdit').onclick=openGoalEdit;
   renderBurnRow();
   const list=document.getElementById('track-list');
-  const di=days.findIndex(d=>d.today); const dIdx=di<0?0:di;
+  // Tracker arbeitet immer am echten heutigen Tag (unabhängig von der Kalenderwoche)
+  const dIdx=(new Date().getDay()+6)%7;
   const addBtn=`<button class="track-add" id="trackAdd">+ Mahlzeit hinzufügen oder scannen</button>`;
   const ord=tm.map((t,i)=>({t,i})).sort((a,b)=>((a.t.t??labelTime[a.t.l]??900)-(b.t.t??labelTime[b.t.l]??900)));
   if(!tm.length){ list.innerHTML='<div style="color:var(--ink-soft);font-size:14px;padding:20px 0;text-align:center">Für heute noch nichts geplant.</div>'+addBtn;
-    document.getElementById('trackAdd').onclick=()=>openPicker(dIdx,{mode:'add',onDone:renderTrack});
+    document.getElementById('trackAdd').onclick=()=>openTrackAddMenu(dIdx);
     updateRing(); return; }
   list.innerHTML=ord.map(({t,i})=>{const m=mealById(t.id); const mac=entryMacros(t);return`
     <div class="track-meal ${t.done?'done':''}">
       <div class="tm-thumb" style="background:${m.g}" data-rec="${t.id}">${m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:11px">`:m.emoji}</div>
-      <div class="tm-info" data-rec="${t.id}">
+      <div class="tm-info">
         <div class="tm-label"><span class="tm-type" data-type="${i}">${fmtTime(t.t??labelTime[t.l]??15*60)} · ${t.l} ✎</span>${t.prep?' · 🍳':''}</div>
-        <div class="tm-name">${m.name}</div>
-        <div class="tm-kcal">${mac.kcal} kcal · ${mac.p}g Protein${mac.cooked?`<span class="cooked-pill">🍲 ${cookedDateStr(mac.date)}</span>`:''}</div>
+        <div class="tm-name" data-rec="${t.id}">${m.name}</div>
+        <div class="tm-kcal tm-adj" data-adj="${i}">${mac.kcal} kcal · ${mac.p}g Protein${mac.adjusted?'<span class="adj-pill">angepasst</span>':mac.cooked?`<span class="cooked-pill">🍲 ${mac.portionG||m.cooked.portionG} g</span>`:''} <span class="tm-adj-ico">✎</span></div>
       </div>
       <button class="tm-del" data-i="${i}">×</button>
       <button class="check ${t.done?'on':''}" data-i="${i}">✓</button>
@@ -1947,9 +2355,12 @@ function renderTrack(){
   list.querySelectorAll('.tm-del').forEach(b=>{
     b.onclick=(e)=>{ e.stopPropagation(); tm.splice(+b.dataset.i,1); renderTrack(); renderWeek(); if(typeof renderCalendar==='function')renderCalendar(); saveState(); };
   });
-  list.querySelectorAll('.tm-type').forEach(el=>{ el.onclick=(e)=>{ e.stopPropagation(); openSlotType(dIdx, +el.dataset.type, renderTrack); }; });
-  list.querySelectorAll('[data-rec]').forEach(el=>{ el.onclick=(e)=>{ if(e.target.closest('.tm-type'))return; openRecipe(+el.dataset.rec); }; });
-  document.getElementById('trackAdd').onclick=()=>openPicker(dIdx,{mode:'add',onDone:renderTrack});
+  list.querySelectorAll('.tm-type').forEach(el=>{ el.onclick=(e)=>{ e.stopPropagation(); openSlotType(dIdx, +el.dataset.type, renderTrack, todayRef()); }; });
+  // Makro-/Portionszeile → Pro-Tag-Anpassung (ändert NICHT das Rezept)
+  list.querySelectorAll('.tm-adj').forEach(el=>{ el.onclick=(e)=>{ e.stopPropagation(); openTrackAdjust(dIdx, +el.dataset.adj); }; });
+  // Name/Bild → Rezept ansehen
+  list.querySelectorAll('[data-rec]').forEach(el=>{ el.onclick=(e)=>{ if(e.target.closest('.tm-type')||e.target.closest('.tm-adj'))return; openRecipe(+el.dataset.rec); }; });
+  document.getElementById('trackAdd').onclick=()=>openTrackAddMenu(dIdx);
   updateRing();
 }
 // Verbrauchte Kalorien des Tages (z.B. aus Apple Health abgelesen) eintragen
@@ -1981,10 +2392,15 @@ function macroTargets(d){
   const pPerKg = U().key==='v' ? 1.8 : 1.6;         // g Protein / kg
   // Körpergewicht grob aus base ableiten (nur falls nicht gesetzt): ~ base/32
   const kg = U().weight || Math.round((U().base)/32);
-  const pG = Math.round(pPerKg*kg);
-  const fG = Math.round(kcal*0.28/9);               // ~28% Fett
-  const cG = Math.max(0, Math.round((kcal - pG*4 - fG*9)/4));  // Rest Carbs
-  return {kcal, p:pG, c:cG, f:fG, kg};
+  const autoP = Math.round(pPerKg*kg);
+  const autoF = Math.round(kcal*0.28/9);               // ~28% Fett
+  const autoC = Math.max(0, Math.round((kcal - autoP*4 - autoF*9)/4));  // Rest Carbs
+  // Eigene Makroziele überschreiben die automatischen (einzeln wählbar)
+  const mg = U().macroGoal || {};
+  const pG = (mg.p!=null) ? mg.p : autoP;
+  const fG = (mg.f!=null) ? mg.f : autoF;
+  const cG = (mg.c!=null) ? mg.c : autoC;
+  return {kcal, p:pG, c:cG, f:fG, kg, custom:!!(mg.p!=null||mg.c!=null||mg.f!=null), auto:{p:autoP,c:autoC,f:autoF}};
 }
 // Gesundheits-Feedback des Tages (Ampel) — anhand gegessener Mahlzeiten
 function dayHealth(d){
@@ -2088,9 +2504,20 @@ function updateRing(){
 function openGoalEdit(){
   const m=document.getElementById('modal');
   let base=U().base;
+  // Makro-Ziele: aktueller Zustand (custom oder auto)
+  const td0=todayDay();
+  let customMacros = !!U().macroGoal;
+  // Startwerte: eigene, sonst die automatisch berechneten für heute
+  const autoNow=()=>{ const mt=macroTargets(td0); return mt.auto; };
+  let mg = U().macroGoal ? {...U().macroGoal} : {...autoNow()};
   const draw=()=>{
+    const a=autoNow();
+    const shownP = customMacros ? (mg.p??a.p) : a.p;
+    const shownC = customMacros ? (mg.c??a.c) : a.c;
+    const shownF = customMacros ? (mg.f??a.f) : a.f;
+    const kcalFromMacros = Math.round(shownP*4 + shownC*4 + shownF*9);
     m.innerHTML=`<div class="grab"></div>
-      <h2>🎯 Kalorienziel · ${U().name}</h2>
+      <h2>🎯 Ziele · ${U().name}</h2>
       <div class="mh-sub">Grundziel (Ruhetag). Arbeit/Sport werden automatisch draufgerechnet.</div>
       <div class="goal-big"><span class="num" id="gBase">${base}</span> <span>kcal / Ruhetag</span></div>
       <div class="stepper" style="justify-content:center;margin:0 auto 18px;width:max-content">
@@ -2101,11 +2528,39 @@ function openGoalEdit(){
         <div class="gt"><div class="gtl">Arbeit</div><div class="gtv num">${base+ADD.work}</div></div>
         <div class="gt"><div class="gtl">Sport</div><div class="gtv num">${base+ADD.sport}</div></div>
       </div>
-      <button class="btn lime" id="gSave">Ziel speichern</button>`;
+
+      <div class="mg-head">
+        <div><div class="mg-title">Makro-Ziele</div><div class="mg-sub">Protein · Carbs · Fett (g pro Tag)</div></div>
+        <button class="mg-toggle ${customMacros?'on':''}" id="mgToggle">${customMacros?'Selbst':'Auto'}</button>
+      </div>
+      <div class="mg-grid ${customMacros?'':'mg-auto'}">
+        <div class="mg-cell"><label>Protein</label><input id="mgP" inputmode="numeric" value="${shownP}" ${customMacros?'':'disabled'}><small>${Math.round(shownP*4)} kcal</small></div>
+        <div class="mg-cell"><label>Carbs</label><input id="mgC" inputmode="numeric" value="${shownC}" ${customMacros?'':'disabled'}><small>${Math.round(shownC*4)} kcal</small></div>
+        <div class="mg-cell"><label>Fett</label><input id="mgF" inputmode="numeric" value="${shownF}" ${customMacros?'':'disabled'}><small>${Math.round(shownF*9)} kcal</small></div>
+      </div>
+      <div class="mg-note" id="mgNote">${customMacros?`Summe der Makros: <b>${kcalFromMacros} kcal</b>${Math.abs(kcalFromMacros-(base+ADD[td0.act]))>120?` · dein heutiges Kalorienziel sind ${base+ADD[td0.act]} kcal`:''}`:'Makros werden automatisch aus deinem Kalorienziel berechnet.'}</div>
+
+      <button class="btn lime" id="gSave">Ziele speichern</button>`;
     m.querySelectorAll('.stepper button').forEach(b=>b.onclick=()=>{base=Math.max(1000,base+(+b.dataset.s));draw();});
     m.querySelector('#gInput').oninput=e=>{base=parseInt(e.target.value)||base;
-      document.getElementById('gBase').textContent=base;};
-    m.querySelector('#gSave').onclick=()=>{U().base=base;closeModal();renderTrack();renderCalendar();saveState();toast(U().name+': Ziel '+base+' kcal');};
+      document.getElementById('gBase').textContent=base; if(!customMacros) draw();};
+    m.querySelector('#mgToggle').onclick=()=>{ customMacros=!customMacros;
+      if(customMacros){ const a=autoNow(); mg={p:mg.p??a.p, c:mg.c??a.c, f:mg.f??a.f}; }
+      draw(); };
+    ['mgP','mgC','mgF'].forEach((id,k)=>{ const el=m.querySelector('#'+id); if(!el)return;
+      el.oninput=()=>{ const key='pcf'[k]; mg[key]=parseInt(el.value)||0;
+        // Live-Note + kcal-Hilfen aktualisieren
+        const sP=mg.p||0,sC=mg.c||0,sF=mg.f||0; const kk=Math.round(sP*4+sC*4+sF*9);
+        const note=m.querySelector('#mgNote'); const dayT=base+ADD[td0.act];
+        if(note) note.innerHTML=`Summe der Makros: <b>${kk} kcal</b>${Math.abs(kk-dayT)>120?` · dein heutiges Kalorienziel sind ${dayT} kcal`:''}`;
+      }; });
+    m.querySelector('#gSave').onclick=()=>{
+      U().base=base;
+      if(customMacros){ U().macroGoal={p:parseInt(m.querySelector('#mgP').value)||0, c:parseInt(m.querySelector('#mgC').value)||0, f:parseInt(m.querySelector('#mgF').value)||0}; }
+      else { delete U().macroGoal; }
+      closeModal();renderTrack();renderCalendar();saveState();
+      toast(U().name+': Ziele gespeichert');
+    };
   };
   draw();openModal();
 }
@@ -2134,7 +2589,8 @@ const freshIng=n=>/hähnchen|pute|hack|rind|lachs|fisch|thun|quark|skyr|joghurt|
 function rebuildShopping(){
   // Zutaten über ALLE geplanten Gerichte beider Nutzer summieren, pro Nutzer merken
   const agg={}; // name -> {g, who:Set}
-  users.forEach(u=>{ u.days.forEach(d=>d.meals.forEach(e=>{ const m=mealById(e.id); if(!m||!m.ings)return;
+  // Einkaufsliste bezieht sich auf die aktuell angezeigte Woche (beide Nutzer)
+  users.forEach(u=>{ const wk=weekOf(u,weekKey); wk.days.forEach(d=>d.meals.forEach(e=>{ const m=mealById(e.id); if(!m||!m.ings)return;
     m.ings.forEach(x=>{ const name=x[0], g=parseFloat(x[1])||0;
       if(!agg[name]) agg[name]={g:0, who:new Set()};
       agg[name].g+=g; agg[name].who.add(u.key); }); })); });
@@ -2208,19 +2664,24 @@ function adjustPortions(id, delta){
 // Makros einer EINGEPLANTEN Mahlzeit: nutzt die aktuelle Charge, wenn vorhanden
 function entryMacros(entry){
   const m=mealById(entry.id); if(!m) return {kcal:0,p:0,c:0,f:0,cooked:false};
+  // Pro-Eintrag-Anpassung (nur fürs Tracking, ändert NICHT das Rezept)
+  if(entry.ovr){ const o=entry.ovr;
+    return {kcal:Math.round(o.kcal||0), p:Math.round(o.p||0), c:Math.round(o.c||0), f:Math.round(o.f||0),
+            cooked:!!m.cooked, date:m.cooked&&m.cooked.date, adjusted:true}; }
   if(m.cooked){ const g=entry.g||m.cooked.portionG||150; const r=g/100; const q=m.cooked.per100;
-    return {kcal:Math.round(q.kcal*r), p:Math.round(q.p*r), c:Math.round(q.c*r), f:Math.round(q.f*r), cooked:true, date:m.cooked.date}; }
+    return {kcal:Math.round(q.kcal*r), p:Math.round(q.p*r), c:Math.round(q.c*r), f:Math.round(q.f*r), cooked:true, date:m.cooked.date, portionG:g}; }
   return {kcal:m.kcal, p:m.p, c:m.c, f:m.f, cooked:false};
 }
 function cookedDateStr(ts){ const d=new Date(ts); const dys=Math.floor((Date.now()-ts)/86400000);
   const dd=d.getDate()+'.'+(d.getMonth()+1)+'.'; return dys<=0?'heute':dys===1?'gestern':dd; }
 
 // ===== Slot-Typ einer eingeplanten Mahlzeit ändern =====
-function openSlotType(di, idx, onDone){
-  const e=days[di].meals[idx]; const mod=document.getElementById('modal');
+function openSlotType(di, idx, onDone, dayObj){
+  const day = dayObj || days[di];
+  const e=day.meals[idx]; const mod=document.getElementById('modal');
   mod.innerHTML=`<div class="grab"></div>
     <h2>Als was einplanen?</h2>
-    <div class="mh-sub">${mealById(e.id).name} · ${days[di].n}</div>
+    <div class="mh-sub">${mealById(e.id).name} · ${day.n}</div>
     <div class="type-grid">${mealLabels.map(l=>`<button class="type-opt ${l===e.l?'on':''}" data-l="${l}">${l}</button>`).join('')}</div>`;
   mod.querySelectorAll('.type-opt').forEach(b=>b.onclick=()=>{
     e.l=b.dataset.l; e.t=labelTime[e.l]??e.t; markUsed(e.id,e.l);
@@ -2461,11 +2922,17 @@ const STORAGE_KEY='mahlzeit_state_v1';   // zusätzlicher Offline-Fallback pro G
 function snapshotState(){
   return {
     v:1,
-    users: users.map(u=>({
-      base:u.base, goal:u.goal, accent:u.accent||'lime',
-      days:u.days.map(d=>({act:d.act, burn:d.burn||0, meals:d.meals.map(e=>({l:e.l,id:e.id,prep:!!e.prep,cookDay:e.cookDay,done:!!e.done,t:e.t,dur:e.dur,g:e.g}))})),
-      cook:u.cook.map(c=>({day:c.day,when:c.when,id:c.id,portions:c.portions,min:c.min})),
-    })),
+    users: users.map(u=>{
+      migrateWeeks(u);
+      const weeks={};
+      Object.keys(u.weeks).forEach(k=>{ const w=u.weeks[k];
+        weeks[k]={
+          days:w.days.map(d=>({act:d.act, burn:d.burn||0, meals:d.meals.filter(e=>!e.prep).map(e=>({l:e.l,id:e.id,done:!!e.done,t:e.t,dur:e.dur,g:e.g,ovr:e.ovr}))})),
+          cook:w.cook.map(c=>({day:c.day,when:c.when,id:c.id,portions:c.portions,min:c.min})),
+        };
+      });
+      return { base:u.base, goal:u.goal, accent:u.accent||'lime', macroGoal:u.macroGoal||null, weeks };
+    }),
     meals: meals.filter(m=>m.id>=100).map(m=>({id:m.id,name:m.name,emoji:m.emoji,g:m.g,photo:m.photo||null,
       kcal:m.kcal,p:m.p,c:m.c,f:m.f,macroManual:!!m.macroManual,protein:!!m.protein,quick:!!m.quick,ings:m.ings,steps:m.steps||''})),
     userProducts: userProducts,
@@ -2488,12 +2955,24 @@ function applyState(s){
       if(su.base!=null)users[i].base=su.base;
       if(su.goal)users[i].goal=su.goal;
       if(su.accent)users[i].accent=su.accent;
-      if(Array.isArray(su.days)) su.days.forEach((sd,di)=>{ if(!users[i].days[di])return;
-        if(sd.act)users[i].days[di].act=sd.act;
-        users[i].days[di].burn=sd.burn||0;
-        if(Array.isArray(sd.meals)) users[i].days[di].meals=sd.meals.map(e=>({...e}));
-      });
-      if(Array.isArray(su.cook)) users[i].cook=su.cook.map(c=>({...c}));
+      if('macroGoal' in su) users[i].macroGoal = su.macroGoal || null;
+      if(su.weeks && typeof su.weeks==='object'){
+        // Neues Format: komplette Wochen-Map übernehmen
+        const wm={};
+        Object.keys(su.weeks).forEach(k=>{ const w=su.weeks[k]; if(!w||!Array.isArray(w.days))return;
+          wm[k]={ days:w.days.map((d,di)=>({n:DAYNAMES[di], act:d.act||'work', burn:d.burn||0, meals:Array.isArray(d.meals)?d.meals.map(e=>({...e})):[]})),
+                  cook:Array.isArray(w.cook)?w.cook.map(c=>({...c})):[] };
+        });
+        users[i].weeks=wm;
+      } else if(Array.isArray(su.days)){
+        // Altes Format: als laufende Woche migrieren
+        migrateWeeks(users[i]);
+        const wk=weekOf(users[i], todayKey());
+        su.days.forEach((sd,di)=>{ if(!wk.days[di])return;
+          if(sd.act)wk.days[di].act=sd.act; wk.days[di].burn=sd.burn||0;
+          if(Array.isArray(sd.meals)) wk.days[di].meals=sd.meals.map(e=>({...e})); });
+        if(Array.isArray(su.cook)) wk.cook=su.cook.map(c=>({...c}));
+      }
     });
     if(Array.isArray(s.meals)){ // eigene Gerichte wiederherstellen
       s.meals.forEach(sm=>{ const ex=meals.find(m=>m.id===sm.id);
@@ -2666,7 +3145,7 @@ function generateWeek(ids){
   mainChoices.slice(0,4).forEach((m,idx)=>{
     newCook.push({day:cookDays[idx%cookDays.length], when:'Abend', id:m.id, portions:3, min:30});
   });
-  users[au].cook=newCook; cookSessions=newCook;
+  weekOf(users[au],weekKey).cook=newCook; cookSessions=newCook;
   calCook={}; cookSessions.forEach(s=>calCook[s.day]={id:s.id,portions:s.portions});
   autoPlanPrep(); // verteilt die gekochten Portionen auf Mittag/Abend der Folgetage
   // 4) Lücken bei Mittag/Abend mit Vorschlägen füllen
@@ -2707,6 +3186,12 @@ document.getElementById('week-sub').textContent=`${U().name} · Ziel ${U().goal}
 applyTheme();
 renderWeek();renderCalendar();renderCook();renderLib();renderTrack();renderShop();
 initStore();
+// Geteilter Link vom iOS-Kurzbefehl: ?import=<url> öffnet direkt den Rezept-Import
+try{
+  const _ip=new URLSearchParams(location.search).get('import');
+  if(_ip){ switchTab('lib'); setTimeout(()=>openImport(decodeURIComponent(_ip)), 500);
+    history.replaceState(null,'',location.pathname); }
+}catch(e){}
 </script>
 </body>
 </html>
